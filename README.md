@@ -25,6 +25,9 @@
 - **Tailor’s Guide (Artikel)**  
   Konten edukatif dan forum untuk membangun komunitas yang sadar akan pentingnya fashion berkelanjutan (*conscious fashion*).
 
+## ✨ Fitur Lain untuk Customer
+About us, Collection, Education (Artikel), Detail Artikel, Review, Contact, detail collection, detail product, shopping bag, chechkout, confirmation checkout, order history, wishlist product
+
 ---
 
 ## 🔐 Fitur untuk Admin
