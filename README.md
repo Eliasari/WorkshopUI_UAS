@@ -1,5 +1,7 @@
 # Rewear.co – Platform Digital Fashion Sirkular Berbasis Teknologi
 
+![Tampilan Rewear.co](https://drive.google.com/uc?export=view&id=1-dkWVQLdbeq_Ft-F1zybA7TgFY8lL552)
+
 **Rewear.co** adalah platform digital berbasis *sustainable fashion technology* yang dirancang untuk menjembatani pengguna individu dengan penjahit lokal dalam proses **redesign, reuse,** dan **upcycle** pakaian bekas.
 
 🔗 **Live Preview**  
