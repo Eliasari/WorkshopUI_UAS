@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kelola Transaksi | Rewear.co</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-gray-50">
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <div class="hidden md:flex md:flex-shrink-0">
+            <div class="flex flex-col w-64 bg-white border-r border-gray-200">
+                <div class="flex flex-col flex-grow pt-5 pb-4 overflow-y-auto">
+                    <div class="flex items-center justify-center flex-shrink-0 px-4 mb-8">
+                        <div class="w-10 h-10 rounded-md bg-purple-600 flex items-center justify-center mr-3">
+                            <i class="fas fa-recycle text-white text-xl"></i>
+                        </div>
+                        <span class="font-bold text-xl text-purple-600">Rewear.co</span>
+                    </div>
+                    
+                    <div class="flex-grow flex flex-col">
+                        <nav class="flex-1 px-2 space-y-1">
+                            <a href="dashboard.html" class="group flex items-center px-4 py-3 text-sm font-medium text-gray-700 hover:bg-purple-50 hover:text-purple-600 rounded-xl transition duration-150">
+                                <i class="fas fa-th-large mr-3 text-gray-400 group-hover:text-purple-600"></i>
+                                Dashboard
+                            </a>
+                            <a href="admin-artikel.html" class="group flex items-center px-4 py-3 text-sm font-medium text-gray-700 hover:bg-purple-50 hover:text-purple-600 rounded-xl transition duration-150">
+                                <i class="fas fa-newspaper mr-3 text-gray-400 group-hover:text-purple-600"></i>
+                                Kelola Artikel
+                            </a>
+                            <a href="admin-produk.html" class="group flex items-center px-4 py-3 text-sm font-medium text-gray-700 hover:bg-purple-50 hover:text-purple-600 rounded-xl transition duration-150">
+                                <i class="fas fa-tshirt mr-3 text-gray-400 group-hover:text-purple-600"></i>
+                                Kelola Produk
+                            </a>
+                            <a href="admin-pengguna.html" class="group flex items-center px-4 py-3 text-sm font-medium text-gray-700 hover:bg-purple-50 hover:text-purple-600 rounded-xl transition duration-150">
+                                <i class="fas fa-users mr-3 text-gray-400 group-hover:text-purple-600"></i>
+                                Kelola Pengguna
+                            </a>
+                            <a href="admin-transaksi.html" class="group flex items-center px-4 py-3 text-sm font-medium text-purple-600 bg-purple-50 rounded-xl">
+                                <i class="fas fa-credit-card mr-3 text-purple-600"></i>
+                                Kelola Transaksi
+                            </a>
+                        </nav>
+                    </div>
+                    
+                    <div class="px-2 mt-6 mb-4">
+                        <div class="bg-purple-50 rounded-xl p-4">
+                            <div class="flex items-center">
+                                <img src="../assets/images/photo.jpeg" alt="Admin" class="w-10 h-10 rounded-full object-cover">
+                                <div class="ml-3">
+                                    <p class="text-sm font-medium text-gray-800">Admin User</p>
+                                    <p class="text-xs text-gray-500">admin@rewear.co</p>
+                                </div>
+                            </div>
+                            <div class="mt-4 flex justify-between">
+                                <button class="text-sm text-purple-600 hover:text-purple-800 flex items-center">
+                                    <i class="fas fa-cog mr-1"></i> Settings
+                                </button>
+                                <button onclick="window.location.href='login.html'"
+                                    class="text-sm text-purple-600 hover:text-purple-800 flex items-center">
+                                    <i class="fas fa-sign-out-alt mr-1"></i> Logout
+                            </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile sidebar & overlay -->
+        <div class="md:hidden fixed inset-0 z-40 flex">
+            <div id="sidebarOverlay" class="fixed inset-0 bg-gray-600 bg-opacity-75 transition-opacity hidden"></div>
+            
+            <div id="mobileSidebar" class="fixed inset-y-0 left-0 flex flex-col w-full max-w-xs bg-white transform -translate-x-full transition duration-300 ease-in-out hidden">
+                <div class="flex items-center justify-between px-4 py-5 border-b border-gray-200">
+                    <div class="flex items-center">
+                        <div class="w-8 h-8 rounded-md bg-purple-600 flex items-center justify-center mr-2">
+                            <i class="fas fa-recycle text-white text-lg"></i>
+                        </div>
+                        <span class="font-bold text-lg text-purple-600">Rewear.co</span>
+                    </div>
+                    <button id="closeSidebar" class="text-gray-500 hover:text-gray-700 focus:outline-none">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                
+                <div class="overflow-y-auto">
+                    <nav class="px-4 pt-4 space-y-1">
+                        <a href="dashboard.html" class="group flex items-center px-3 py-3 text-sm font-medium text-gray-700 hover:bg-purple-50 hover:text-purple-600 rounded-xl">
+                            <i class="fas fa-th-large mr-3 text-gray-400 group-hover:text-purple-600"></i>
+                            Dashboard
+                        </a>
+                        <a href="#" class="group flex items-center px-3 py-3 text-sm font-medium text-gray-700 hover:bg-purple-50 hover:text-purple-600 rounded-xl">
+                            <i class="fas fa-newspaper mr-3 text-gray-400 group-hover:text-purple-600"></i>
+                            Kelola Artikel
+                        </a>
+                        <a href="#" class="group flex items-center px-3 py-3 text-sm font-medium text-gray-700 hover:bg-purple-50 hover:text-purple-600 rounded-xl">
+                            <i class="fas fa-tshirt mr-3 text-gray-400 group-hover:text-purple-600"></i>
+                            Kelola Produk
+                        </a>
+                        <a href="kelola-pengguna.html" class="group flex items-center px-3 py-3 text-sm font-medium text-gray-700 hover:bg-purple-50 hover:text-purple-600 rounded-xl">
+                            <i class="fas fa-users mr-3 text-gray-400 group-hover:text-purple-600"></i>
+                            Kelola Pengguna
+                        </a>
+                        <a href="kelola-transaksi.html" class="group flex items-center px-3 py-3 text-sm font-medium text-purple-600 bg-purple-50 rounded-xl">
+                            <i class="fas fa-credit-card mr-3 text-purple-600"></i>
+                            Kelola Transaksi
+                        </a>
+                    </nav>
+                </div>
+                
+                <div class="px-4 mt-auto mb-6">
+                    <div class="bg-purple-50 rounded-xl p-4">
+                        <div class="flex items-center">
+                            <img src="../assets/images/photo.jpeg" alt="Admin" class="w-10 h-10 rounded-full object-cover">
+                            <div class="ml-3">
+                                <p class="text-sm font-medium text-gray-800">Admin User</p>
+                                <p class="text-xs text-gray-500">admin@rewear.co</p>
+                            </div>
+                        </div>
+                        <div class="mt-4 flex justify-between">
+                            <button class="text-sm text-purple-600 hover:text-purple-800 flex items-center">
+                                <i class="fas fa-cog mr-1"></i> Settings
+                            </button>
+                           <button onclick="window.location.href='login.html'"
+                                    class="text-sm text-purple-600 hover:text-purple-800 flex items-center">
+                                    <i class="fas fa-sign-out-alt mr-1"></i> Logout
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main content -->
+        <div class="flex flex-col flex-1 w-0 overflow-hidden">
+            <!-- Top navbar -->
+            <div class="relative z-10 flex-shrink-0 flex h-16 bg-white border-b border-gray-200">
+                <button id="openSidebar" class="md:hidden px-4 text-gray-500 focus:outline-none focus:bg-gray-100">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <div class="flex-1 px-4 flex justify-between">
+                    <div class="flex-1 flex items-center">
+                        <h1 class="text-xl font-semibold text-gray-800">Kelola Transaksi</h1>
+                    </div>
+                    <div class="ml-4 flex items-center md:ml-6">
+                        <button class="p-2 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:text-gray-500">
+                            <i class="fas fa-bell"></i>
+                        </button>
+                        <div class="ml-3 relative">
+                            <button class="max-w-xs flex items-center text-sm rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:text-gray-500">
+                                <i class="fas fa-question-circle text-xl"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <main class="flex-1 relative overflow-y-auto focus:outline-none">
+                <div class="py-6">
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+                        <!-- Welcome section -->
+                        <div class="bg-purple-600 rounded-3xl p-6 sm:p-10 mb-6 text-white">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <h2 class="text-2xl sm:text-3xl font-bold mb-2">Kelola Transaksi</h2>
+                                    <p class="text-purple-100 mb-4">Pantau dan kelola semua transaksi di Rewear.co dari satu tempat.</p>
+                                    <div class="flex flex-wrap gap-3 mt-6">
+                                        <button class="bg-white text-purple-600 hover:bg-purple-50 px-4 py-2 rounded-xl font-medium transition duration-150 flex items-center" id="exportTransactionBtn">
+                                            <i class="fas fa-download mr-2"></i> Export Data
+                                        </button>
+                                        <button class="bg-purple-500 hover:bg-purple-400 px-4 py-2 rounded-xl font-medium transition duration-150 flex items-center" id="generateReportBtn">
+                                            <i class="fas fa-chart-line mr-2"></i> Laporan Bulanan
+                                        </button>
+                                    </div>
+                                </div>
+                                <!-- <div class="hidden md:flex justify-end">
+                                    <div class="relative">
+                                     
+                                        <div class="absolute top-0 right-0 w-16 h-16 bg-purple-500 rounded-full opacity-60"></div>
+                                        <div class="absolute bottom-0 left-0 w-20 h-20 bg-purple-500 rounded-full opacity-60"></div>
+                                      
+                                        <div class="absolute top-4 left-12 w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-lg">
+                                            <i class="fas fa-shopping-cart text-purple-600 text-xl"></i>
+                                        </div>
+                                        <div class="absolute bottom-4 right-10 w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-lg">
+                                            <i class="fas fa-money-bill-wave text-purple-600 text-xl"></i>
+                                        </div>
+                                        <div class="absolute top-1/2 right-1/3 w-14 h-14 bg-white rounded-xl flex items-center justify-center shadow-lg transform -translate-y-1/2">
+                                            <i class="fas fa-chart-pie text-purple-600 text-xl"></i>
+                                        </div>
+                                    </div>
+                                </div> -->
+                            </div>
+                        </div>
+                        
+                        <!-- Stats cards -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-8">
+                            <div class="bg-white rounded-2xl shadow p-6 flex items-center dashboard-card">
+                                <div class="rounded-full bg-purple-100 p-3 mr-4">
+                                    <i class="fas fa-shopping-cart text-purple-600 text-xl"></i>
+                                </div>
+                                <div>
+                                    <p class="text-gray-500 text-sm">Total Transaksi</p>
+                                    <h3 class="text-2xl font-bold text-gray-800">1,458</h3>
+                                    <p class="text-green-500 text-xs font-medium flex items-center mt-1">
+                                        <i class="fas fa-arrow-up mr-1"></i> 24% increase
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-white rounded-2xl shadow p-6 flex items-center dashboard-card">
+                                <div class="rounded-full bg-blue-100 p-3 mr-4">
+                                    <i class="fas fa-money-bill-wave text-blue-600 text-xl"></i>
+                                </div>
+                                <div>
+                                    <p class="text-gray-500 text-sm">Pendapatan</p>
+                                    <h3 class="text-2xl font-bold text-gray-800">Rp 45,8 jt</h3>
+                                    <p class="text-green-500 text-xs font-medium flex items-center mt-1">
+                                        <i class="fas fa-arrow-up mr-1"></i> 18% increase
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-white rounded-2xl shadow p-6 flex items-center dashboard-card">
+                                <div class="rounded-full bg-green-100 p-3 mr-4">
+                                    <i class="fas fa-box text-green-600 text-xl"></i>
+                                </div>
+                                <div>
+                                    <p class="text-gray-500 text-sm">Pesanan Baru</p>
+                                    <h3 class="text-2xl font-bold text-gray-800">32</h3>
+                                    <p class="text-green-500 text-xs font-medium flex items-center mt-1">
+                                        <i class="fas fa-arrow-up mr-1"></i> 8% increase
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-white rounded-2xl shadow p-6 flex items-center dashboard-card">
+                                <div class="rounded-full bg-amber-100 p-3 mr-4">
+                                    <i class="fas fa-truck text-amber-600 text-xl"></i>
+                                </div>
+                                <div>
+                                    <p class="text-gray-500 text-sm">Dalam Pengiriman</p>
+                                    <h3 class="text-2xl font-bold text-gray-800">64</h3>
+                                    <p class="text-red-500 text-xs font-medium flex items-center mt-1">
+                                        <i class="fas fa-arrow-down mr-1"></i> 5% decrease
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Charts -->
+                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+                            <div class="bg-white rounded-2xl shadow p-6 lg:col-span-2">
+                                <div class="flex flex-wrap justify-between items-center mb-6">
+                                    <h2 class="text-lg font-semibold text-gray-800">Tren Transaksi</h2>
+                                    <div class="flex space-x-2 mt-2 sm:mt-0">
+                                        <button class="px-3 py-1 text-sm bg-purple-100 text-purple-600 rounded-lg">Bulanan</button>
+                                        <button class="px-3 py-1 text-sm text-gray-500 hover:bg-gray-100 rounded-lg">Mingguan</button>
+                                        <button class="px-3 py-1 text-sm text-gray-500 hover:bg-gray-100 rounded-lg">Harian</button>
+                                    </div>
+                                </div>
+                                <div class="h-64">
+                                    <canvas id="transactionChart"></canvas>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-white rounded-2xl shadow p-6">
+                                <div class="flex justify-between items-center mb-6">
+                                    <h2 class="text-lg font-semibold text-gray-800">Status Pesanan</h2>
+                                    <button class="text-purple-600 hover:text-purple-800 text-sm font-medium">
+                                        <i class="fas fa-ellipsis-h"></i>
+                                    </button>
+                                </div>
+                                <div class="h-64 flex items-center justify-center">
+                                    <canvas id="orderStatusChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Transaction Table -->
+                        <div class="bg-white rounded-2xl shadow overflow-hidden mb-8">
+                            <div class="px-6 py-5 border-b border-gray-200 flex justify-between items-center">
+                                <h2 class="text-lg font-semibold text-gray-800">Daftar Transaksi</h2>
+                                <div class="flex space-x-2">
+                                    <button class="bg-purple-100 text-purple-600 px-3 py-1 rounded-lg text-sm font-medium">
+                                        <i class="fas fa-filter mr-1"></i> Filter
+                                    </button>
+                                    <button class="bg-purple-100 text-purple-600 px-3 py-1 rounded-lg text-sm font-medium">
+                                        <i class="fas fa-download mr-1"></i> Export
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Filter and search -->
+                            <div class="px-6 py-4 border-b border-gray-200 bg-gray-50">
+                                <div class="flex flex-wrap items-center justify-between">
+                                    <div class="w-full md:w-1/3 mb-3 md:mb-0">
+                                        <div class="relative">
+                                            <input type="text" id="searchTransaction" placeholder="Cari transaksi..." class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent" />
+                                            <div class="absolute inset-y-0 right-0 pr-3 flex items-center">
+                                                <i class="fas fa-search text-gray-400"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="w-full md:w-auto flex flex-wrap gap-2">
+                                        <select id="statusFilter" class="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                                            <option value="">Semua Status</option>
+                                            <option value="pending">Menunggu Pembayaran</option>
+                                            <option value="processing">Diproses</option>
+                                            <option value="shipped">Dikirim</option>
+                                            <option value="delivered">Diterima</option>
+                                            <option value="cancelled">Dibatalkan</option>
+                                        </select>
+                                        <select id="dateFilter" class="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                                            <option value="">Semua Waktu</option>
+                                            <option value="today">Hari Ini</option>
+                                            <option value="week">Minggu Ini</option>
+                                            <option value="month">Bulan Ini</option>
+                                            <option value="year">Tahun Ini</option>
+                                        </select>
+                                        <button id="resetFilter" class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium flex items-center">
+                                            <i class="fas fa-sync-alt mr-2"></i> Reset
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Table -->
+                            <div class="overflow-x-auto">
+                                <table class="min-w-full divide-y divide-gray-200">
+                                    <thead class="bg-gray-50">
+                                        <tr>
+                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                ID Transaksi
+                                            </th>
+                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Pelanggan
+                                            </th>
+                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Produk
+                                            </th>
+                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Total
+                                            </th>
+                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Status
+                                            </th>
+                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Tanggal
+                                            </th>
+                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Aksi
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="bg-white divide-y divide-gray-200">
+                                        <tr>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <div class="text-sm font-medium text-gray-900">#TRX-2023-001</div>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <div class="flex items-center">
+                                                    <div class="flex-shrink-0 h-8 w-8">
+                                                        <div class="h-8 w-8 rounded-full bg-gray-100 flex items-center justify-center">
+                                                            <span class="text-gray-600 font-medium text-xs">JS</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="ml-4">
+                                                        <div class="text-sm font-medium text-gray-900">Jane Smith</div>
+                                                        <div class="text-sm text-gray-500">jane.smith@example.com</div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <div class="text-sm text-gray-900">Eco-friendly T-shirt</div>
+                                                <div class="text-sm text-gray-500">2 items</div>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <div class="text-sm font-medium text-gray-900">Rp 450.000</div>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <span class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                                    Dikirim
+                                                </span>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                15 Mei 2023
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                                <button class="text-purple-600 hover:text-purple-900 mr-3 view-transaction" data-id="TRX-2023-001">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                                <button class="text-blue-600 hover:text-blue-900 mr-3 update-status" data-id="TRX-2023-001">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                                <button class="text-red-600 hover:text-red-900 cancel-transaction" data-id="TRX-2023-001">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <div class="text-sm font-medium text-gray-900">#TRX-2023-002</div>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <div class="flex items-center">
+                                                    <div class="flex-shrink-0 h-8 w-8">
+                                                        <div class="h-8 w-8 rounded-full bg-gray-100 flex items-center justify-center">
+                                                            <span class="text-gray-600 font-medium text-xs">JD</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="ml-4">
+                                                        <div class="text-sm font-medium text-gray-900">John Doe</div>
+                                                        <div class="text-sm text-gray-500">john.doe@example.com</div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <div class="text-sm text-gray-900">Vintage Denim Jacket</div>
+                                                <div class="text-sm text-gray-500">1 item</div>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <div class="text-sm font-medium text-gray-900">Rp 750.000</div>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <span class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
+                                                    Diproses
+                                                </span>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                14 Mei 2023
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                                <button class="text-purple-600 hover:text-purple-900 mr-3 view-transaction" data-id="TRX-2023-002">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                                <button class="text-blue-600 hover:text-blue-900 mr-3 update-status" data-id="TRX-2023-002">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                                <button class="text-red-600 hover:text-red-900 cancel-transaction" data-id="TRX-2023-002">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <div class="text-sm font-medium text-gray-900">#TRX-2023-003</div>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <div class="flex items-center">
+                                                    <div class="flex-shrink-0 h-8 w-8">
+                                                        <div class="h-8 w-8 rounded-full bg-gray-100 flex items-center justify-center">
+                                                            <span class="text-gray-600 font-medium text-xs">RJ</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="ml-4">
+                                                        <div class="text-sm font-medium text-gray-900">Robert Johnson</div>
+                                                        <div class="text-sm text-gray-500">robert.j@example.com</div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <div class="text-sm text-gray-900">Sustainable Sneakers</div>
+                                                <div class="text-sm text-gray-500">1 item</div>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <div class="text-sm font-medium text-gray-900">Rp 520.000</div>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <span class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
+                                                    Diterima
+                                                </span>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                12 Mei 2023
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                                <button class="text-purple-600 hover:text-purple-900 mr-3 view-transaction" data-id="TRX-2023-003">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                                <button class="text-blue-600 hover:text-blue-900 mr-3 update-status" data-id="TRX-2023-003">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                                <button class="text-red-600 hover:text-red-900 cancel-transaction" data-id="TRX-2023-003">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <div class="text-sm font-medium text-gray-900">#TRX-2023-004</div>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <div class="flex items-center">
+                                                    <div class="flex-shrink-0 h-8 w-8">
+                                                        <div class="h-8 w-8 rounded-full bg-gray-100 flex items-center justify-center">
+                                                            <span class="text-gray-600 font-medium text-xs">EW</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="ml-4">
+                                                        <div class="text-sm font-medium text-gray-900">Emily Wilson</div>
+                                                        <div class="text-sm text-gray-500">emily.w@example.com</div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <div class="text-sm text-gray-900">Organic Cotton Dress</div>
+                                                <div class="text-sm text-gray-500">1 item</div>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <div class="text-sm font-medium text-gray-900">Rp 680.000</div>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <span class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
+                                                    Dibatalkan
+                                                </span>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                10 Mei 2023
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                                <button class="text-purple-600 hover:text-purple-900 mr-3 view-transaction" data-id="TRX-2023-004">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                                <button class="text-blue-600 hover:text-blue-900 mr-3 update-status" data-id="TRX-2023-004">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                                <button class="text-red-600 hover:text-red-900 cancel-transaction" data-id="TRX-2023-004">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <div class="text-sm font-medium text-gray-900">#TRX-2023-005</div>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <div class="flex items-center">
+                                                    <div class="flex-shrink-0 h-8 w-8">
+                                                        <div class="h-8 w-8 rounded-full bg-gray-100 flex items-center justify-center">
+                                                            <span class="text-gray-600 font-medium text-xs">MB</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="ml-4">
+                                                        <div class="text-sm font-medium text-gray-900">Michael Brown</div>
+                                                        <div class="text-sm text-gray-500">michael.b@example.com</div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <div class="text-sm text-gray-900">Recycled Backpack</div>
+                                                <div class="text-sm text-gray-500">1 item</div>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <div class="text-sm font-medium text-gray-900">Rp 350.000</div>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <span class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-purple-100 text-purple-800">
+                                                    Menunggu Pembayaran
+                                                </span>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                9 Mei 2023
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                                <button class="text-purple-600 hover:text-purple-900 mr-3 view-transaction" data-id="TRX-2023-005">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                                <button class="text-blue-600 hover:text-blue-900 mr-3 update-status" data-id="TRX-2023-005">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                                <button class="text-red-600 hover:text-red-900 cancel-transaction" data-id="TRX-2023-005">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                            <!-- Pagination -->
+                            <div class="px-6 py-4 bg-gray-50 border-t border-gray-200">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex-1 flex justify-between sm:hidden">
+                                        <a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                                            Previous
+                                        </a>
+                                        <a href="#" class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                                            Next
+                                        </a>
+                                    </div>
+                                    <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+                                        <div>
+                                            <p class="text-sm text-gray-700">
+                                                Showing
+                                                <span class="font-medium">1</span>
+                                                to
+                                                <span class="font-medium">5</span>
+                                                of
+                                                <span class="font-medium">42</span>
+                                                results
+                                            </p>
+                                        </div>
+                                        <div>
+                                            <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
+                                                <a href="#" class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                                                    <span class="sr-only">Previous</span>
+                                                    <i class="fas fa-chevron-left"></i>
+                                                </a>
+                                                <a href="#" aria-current="page" class="z-10 bg-purple-600 border-purple-600 text-white relative inline-flex items-center px-4 py-2 border text-sm font-medium">
+                                                    1
+                                                </a>
+                                                <a href="#" class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium">
+                                                    2
+                                                </a>
+                                                <a href="#" class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium">
+                                                    3
+                                                </a>
+                                                <span class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700">
+                                                    ...
+                                                </span>
+                                                <a href="#" class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium">
+                                                    5
+                                                </a>
+                                                <a href="#" class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                                                    <span class="sr-only">Next</span>
+                                                    <i class="fas fa-chevron-right"></i>
+                                                </a>
+                                            </nav>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- View Transaction Modal -->
+    <div id="viewTransactionModal" class="fixed inset-0 z-50 hidden overflow-y-auto">
+        <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            <div class="fixed inset-0 transition-opacity" aria-hidden="true">
+                <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+            </div>
+            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+            <div class="inline-block align-bottom bg-white rounded-xl text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+                <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                    <div class="sm:flex sm:items-start">
+                        <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left w-full">
+                            <h3 class="text-lg leading-6 font-medium text-gray-900" id="transactionModalTitle">
+                                Detail Transaksi #TRX-2023-001
+                            </h3>
+                            <div class="mt-4">
+                                <div class="border-t border-gray-200 py-3">
+                                    <div class="flex justify-between">
+                                        <span class="text-sm font-medium text-gray-500">Pelanggan</span>
+                                        <span class="text-sm text-gray-900">Jane Smith</span>
+                                    </div>
+                                </div>
+                                <div class="border-t border-gray-200 py-3">
+                                    <div class="flex justify-between">
+                                        <span class="text-sm font-medium text-gray-500">Email</span>
+                                        <span class="text-sm text-gray-900">jane.smith@example.com</span>
+                                    </div>
+                                </div>
+                                <div class="border-t border-gray-200 py-3">
+                                    <div class="flex justify-between">
+                                        <span class="text-sm font-medium text-gray-500">Tanggal</span>
+                                        <span class="text-sm text-gray-900">15 Mei 2023, 14:30</span>
+                                    </div>
+                                </div>
+                                <div class="border-t border-gray-200 py-3">
+                                    <div class="flex justify-between">
+                                        <span class="text-sm font-medium text-gray-500">Status</span>
+                                        <span class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                            Dikirim
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="border-t border-gray-200 py-3">
+                                    <div class="flex justify-between">
+                                        <span class="text-sm font-medium text-gray-500">Metode Pembayaran</span>
+                                        <span class="text-sm text-gray-900">Transfer Bank</span>
+                                    </div>
+                                </div>
+                                <div class="border-t border-gray-200 py-3">
+                                    <span class="text-sm font-medium text-gray-500">Produk</span>
+                                    <div class="mt-2">
+                                        <div class="flex justify-between py-2">
+                                            <div class="flex">
+                                                <div class="h-10 w-10 rounded overflow-hidden flex-shrink-0">
+                                                    <img src="../assets/images/cloth-1.png" alt="Eco-friendly T-shirt" class="h-full w-full object-cover">
+                                                </div>
+                                                <div class="ml-3">
+                                                    <p class="text-sm font-medium text-gray-900">Eco-friendly T-shirt</p>
+                                                    <p class="text-sm text-gray-500">2 x Rp 225.000</p>
+                                                </div>
+                                            </div>
+                                            <span class="text-sm font-medium text-gray-900">Rp 450.000</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="border-t border-gray-200 py-3">
+                                    <div class="flex justify-between">
+                                        <span class="text-sm font-medium text-gray-500">Subtotal</span>
+                                        <span class="text-sm text-gray-900">Rp 450.000</span>
+                                    </div>
+                                </div>
+                                <div class="border-t border-gray-200 py-3">
+                                    <div class="flex justify-between">
+                                        <span class="text-sm font-medium text-gray-500">Pengiriman</span>
+                                        <span class="text-sm text-gray-900">Rp 20.000</span>
+                                    </div>
+                                </div>
+                                <div class="border-t border-gray-200 py-3">
+                                    <div class="flex justify-between">
+                                        <span class="text-sm font-medium text-gray-500">Diskon</span>
+                                        <span class="text-sm text-gray-900">- Rp 20.000</span>
+                                    </div>
+                                </div>
+                                <div class="border-t border-gray-200 py-3">
+                                    <div class="flex justify-between">
+                                        <span class="text-sm font-medium text-gray-900">Total</span>
+                                        <span class="text-sm font-bold text-gray-900">Rp 450.000</span>
+                                    </div>
+                                </div>
+                                <div class="border-t border-gray-200 py-3">
+                                    <div class="flex justify-between">
+                                        <span class="text-sm font-medium text-gray-500">Alamat Pengiriman</span>
+                                        <span class="text-sm text-gray-900 text-right">Jl. Merdeka No. 123, Jakarta Selatan, DKI Jakarta, 12345</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                    <button type="button" id="printInvoiceBtn" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-purple-600 text-base font-medium text-white hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 sm:ml-3 sm:w-auto sm:text-sm">
+                        <i class="fas fa-print mr-2"></i> Cetak Invoice
+                    </button>
+                    <button type="button" id="closeViewTransactionBtn" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                        Tutup
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Update Status Modal -->
+    <div id="updateStatusModal" class="fixed inset-0 z-50 hidden overflow-y-auto">
+        <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            <div class="fixed inset-0 transition-opacity" aria-hidden="true">
+                <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+            </div>
+            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+            <div class="inline-block align-bottom bg-white rounded-xl text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+                <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                    <div class="sm:flex sm:items-start">
+                        <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left w-full">
+                            <h3 class="text-lg leading-6 font-medium text-gray-900" id="updateStatusModalTitle">
+                                Update Status Transaksi #TRX-2023-001
+                            </h3>
+                            <div class="mt-4">
+                                <form id="updateStatusForm">
+                                    <div class="mb-4">
+                                        <label for="transactionStatus" class="block text-sm font-medium text-gray-700">Status</label>
+                                        <select id="transactionStatus" name="transactionStatus" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm">
+                                            <option value="pending">Menunggu Pembayaran</option>
+                                            <option value="processing">Diproses</option>
+                                            <option value="shipped" selected>Dikirim</option>
+                                            <option value="delivered">Diterima</option>
+                                            <option value="cancelled">Dibatalkan</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="statusNote" class="block text-sm font-medium text-gray-700">Catatan (opsional)</label>
+                                        <textarea id="statusNote" name="statusNote" rows="3" class="mt-1 focus:ring-purple-500 focus:border-purple-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"></textarea>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="trackingNumber" class="block text-sm font-medium text-gray-700">Nomor Resi (untuk status Dikirim)</label>
+                                        <input type="text" id="trackingNumber" name="trackingNumber" value="JNE123456789" class="mt-1 focus:ring-purple-500 focus:border-purple-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="notifyCustomer" class="inline-flex items-center">
+                                            <input id="notifyCustomer" name="notifyCustomer" type="checkbox" class="rounded border-gray-300 text-purple-600 shadow-sm focus:border-purple-300 focus:ring focus:ring-purple-200 focus:ring-opacity-50" checked>
+                                            <span class="ml-2 text-sm text-gray-700">Kirim notifikasi ke pelanggan</span>
+                                        </label>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                    <button type="button" id="saveStatusBtn" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-purple-600 text-base font-medium text-white hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 sm:ml-3 sm:w-auto sm:text-sm">
+                        Simpan
+                    </button>
+                    <button type="button" id="closeUpdateStatusBtn" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                        Batal
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cancel Transaction Modal -->
+    <div id="cancelTransactionModal" class="fixed inset-0 z-50 hidden overflow-y-auto">
+        <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            <div class="fixed inset-0 transition-opacity" aria-hidden="true">
+                <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+            </div>
+            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+            <div class="inline-block align-bottom bg-white rounded-xl text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+                <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                    <div class="sm:flex sm:items-start">
+                        <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
+                            <i class="fas fa-exclamation-triangle text-red-600"></i>
+                        </div>
+                        <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                            <h3 class="text-lg leading-6 font-medium text-gray-900">
+                                Batalkan Transaksi
+                            </h3>
+                            <div class="mt-2">
+                                <p class="text-sm text-gray-500">
+                                    Apakah Anda yakin ingin membatalkan transaksi ini? Tindakan ini tidak dapat dibatalkan.
+                                </p>
+                                <div class="mt-4">
+                                    <label for="cancelReason" class="block text-sm font-medium text-gray-700">Alasan Pembatalan</label>
+                                    <select id="cancelReason" name="cancelReason" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm">
+                                        <option value="stock">Stok Habis</option>
+                                        <option value="customer">Permintaan Pelanggan</option>
+                                        <option value="payment">Pembayaran Gagal</option>
+                                        <option value="fraud">Transaksi Mencurigakan</option>
+                                        <option value="other">Lainnya</option>
+                                    </select>
+                                </div>
+                                <div class="mt-4">
+                                    <label for="cancelNote" class="block text-sm font-medium text-gray-700">Catatan Tambahan</label>
+                                    <textarea id="cancelNote" name="cancelNote" rows="3" class="mt-1 focus:ring-red-500 focus:border-red-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                    <button type="button" id="confirmCancelBtn" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm">
+                        Batalkan Transaksi
+                    </button>
+                    <button type="button" id="closeCancelBtn" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                        Kembali
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mobile sidebar toggle
+        document.getElementById('openSidebar').addEventListener('click', function() {
+            document.getElementById('mobileSidebar').classList.remove('hidden', '-translate-x-full');
+            document.getElementById('mobileSidebar').classList.add('translate-x-0');
+            document.getElementById('sidebarOverlay').classList.remove('hidden');
+        });
+        
+        document.getElementById('closeSidebar').addEventListener('click', function() {
+            document.getElementById('mobileSidebar').classList.add('-translate-x-full');
+            document.getElementById('sidebarOverlay').classList.add('hidden');
+        });
+        
+        document.getElementById('sidebarOverlay').addEventListener('click', function() {
+            document.getElementById('mobileSidebar').classList.add('-translate-x-full');
+            document.getElementById('sidebarOverlay').classList.add('hidden');
+        });
+        
+        // Transaction Chart
+        const transactionCtx = document.getElementById('transactionChart').getContext('2d');
+        const transactionChart = new Chart(transactionCtx, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                datasets: [{
+                    label: 'Transaksi',
+                    data: [65, 78, 90, 105, 112, 124, 132, 143, 156, 168, 172, 185],
+                    backgroundColor: 'rgba(124, 58, 237, 0.1)',
+                    borderColor: 'rgba(124, 58, 237, 1)',
+                    borderWidth: 2,
+                    tension: 0.4,
+                    pointBackgroundColor: '#fff',
+                    pointBorderColor: 'rgba(124, 58, 237, 1)',
+                    pointRadius: 4,
+                    pointHoverRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            color: 'rgba(0, 0, 0, 0.05)'
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        }
+                    }
+                }
+            }
+        });
+
+        // Order Status Chart
+        const orderStatusCtx = document.getElementById('orderStatusChart').getContext('2d');
+        const orderStatusChart = new Chart(orderStatusCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Menunggu Pembayaran', 'Diproses', 'Dikirim', 'Diterima', 'Dibatalkan'],
+                datasets: [{
+                    data: [15, 25, 30, 20, 10],
+                    backgroundColor: [
+                        'rgba(124, 58, 237, 0.8)',
+                        'rgba(79, 70, 229, 0.8)',
+                        'rgba(59, 130, 246, 0.8)',
+                        'rgba(16, 185, 129, 0.8)',
+                        'rgba(245, 158, 11, 0.8)'
+                    ],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            boxWidth: 12,
+                            padding: 15
+                        }
+                    }
+                },
+                cutout: '70%'
+            }
+        });
+        
+        // Modal functionality
+        const viewTransactionModal = document.getElementById('viewTransactionModal');
+        const updateStatusModal = document.getElementById('updateStatusModal');
+        const cancelTransactionModal = document.getElementById('cancelTransactionModal');
+        
+        // View Transaction Modal
+        document.querySelectorAll('.view-transaction').forEach(button => {
+            button.addEventListener('click', function() {
+                const transactionId = this.getAttribute('data-id');
+                document.getElementById('transactionModalTitle').textContent = 'Detail Transaksi #' + transactionId;
+                viewTransactionModal.classList.remove('hidden');
+            });
+        });
+        
+        document.getElementById('closeViewTransactionBtn').addEventListener('click', function() {
+            viewTransactionModal.classList.add('hidden');
+        });
+        
+        document.getElementById('printInvoiceBtn').addEventListener('click', function() {
+            alert('Mencetak invoice...');
+        });
+        
+        // Update Status Modal
+        document.querySelectorAll('.update-status').forEach(button => {
+            button.addEventListener('click', function() {
+                const transactionId = this.getAttribute('data-id');
+                document.getElementById('updateStatusModalTitle').textContent = 'Update Status Transaksi #' + transactionId;
+                updateStatusModal.classList.remove('hidden');
+            });
+        });
+        
+        document.getElementById('closeUpdateStatusBtn').addEventListener('click', function() {
+            updateStatusModal.classList.add('hidden');
+        });
+        
+        document.getElementById('saveStatusBtn').addEventListener('click', function() {
+            // Implement save functionality
+            updateStatusModal.classList.add('hidden');
+            // Show success notification
+            alert('Status transaksi berhasil diperbarui!');
+        });
+        
+        // Cancel Transaction Modal
+        document.querySelectorAll('.cancel-transaction').forEach(button => {
+            button.addEventListener('click', function() {
+                const transactionId = this.getAttribute('data-id');
+                cancelTransactionModal.classList.remove('hidden');
+            });
+        });
+        
+        document.getElementById('closeCancelBtn').addEventListener('click', function() {
+            cancelTransactionModal.classList.add('hidden');
+        });
+        
+        document.getElementById('confirmCancelBtn').addEventListener('click', function() {
+            // Implement cancel functionality
+            cancelTransactionModal.classList.add('hidden');
+            // Show success notification
+            alert('Transaksi berhasil dibatalkan!');
+        });
+        
+        // Filter functionality
+        document.getElementById('resetFilter').addEventListener('click', function() {
+            document.getElementById('searchTransaction').value = '';
+            document.getElementById('statusFilter').value = '';
+            document.getElementById('dateFilter').value = '';
+            // Reset table data
+        });
+        
+        // Export functionality
+        document.getElementById('exportTransactionBtn').addEventListener('click', function() {
+            alert('Mengekspor data transaksi...');
+        });
+        
+        // Generate Report functionality
+        document.getElementById('generateReportBtn').addEventListener('click', function() {
+            alert('Membuat laporan bulanan...');
+        });
+    </script>
+</body>
+</html>

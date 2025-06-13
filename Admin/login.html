@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Rewear.co Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="bg-gray-50">
+    <div class="min-h-screen flex">
+        <!-- Left side - Form -->
+        <div class="flex-1 flex flex-col justify-center py-12 px-4 sm:px-6 lg:px-20 xl:px-24">
+            <div class="mx-auto w-full max-w-sm lg:w-96">
+                <div>
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 rounded-md bg-purple-600 flex items-center justify-center mr-3">
+                            <i class="fas fa-recycle text-white text-xl"></i>
+                        </div>
+                        <h2 class="text-3xl font-bold text-purple-600">Rewear.co</h2>
+                    </div>
+                    <h2 class="mt-8 text-3xl font-extrabold text-gray-900">Holla,</h2>
+                    <h2 class="text-3xl font-extrabold text-gray-900">Welcome Back</h2>
+                    <p class="mt-2 text-sm text-gray-600">
+                        Hey, welcome back to your special place
+                    </p>
+                </div>
+
+                <div class="mt-8">
+                    <div class="mt-6">
+                        <form action="#" method="POST" class="space-y-6">
+                            <div>
+                                <div class="mt-1 relative rounded-md shadow-sm">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <i class="fas fa-envelope text-gray-400"></i>
+                                    </div>
+                                    <input type="email" name="email" id="email" class="focus:ring-purple-500 focus:border-purple-500 block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-md" placeholder="Email address" required>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="mt-1 relative rounded-md shadow-sm">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <i class="fas fa-lock text-gray-400"></i>
+                                    </div>
+                                    <input type="password" name="password" id="password" class="focus:ring-purple-500 focus:border-purple-500 block w-full pl-10 pr-10 py-3 border border-gray-300 rounded-md" placeholder="Password" required>
+                                    <div class="absolute inset-y-0 right-0 pr-3 flex items-center">
+                                        <button type="button" id="togglePassword" class="text-gray-400 hover:text-gray-500 focus:outline-none">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <input id="remember-me" name="remember-me" type="checkbox" class="h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300 rounded">
+                                    <label for="remember-me" class="ml-2 block text-sm text-gray-900">
+                                        Remember me
+                                    </label>
+                                </div>
+
+                                <div class="text-sm">
+                                    <a href="#" class="font-medium text-purple-600 hover:text-purple-500">
+                                        Forgot Password?
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div>
+                                <button type="submit" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500">
+                                    Sign In
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+                <div class="mt-6 text-center">
+                    <p class="text-sm text-gray-600">
+                        Don't have an account? 
+                        <a href="register.html" class="font-medium text-purple-600 hover:text-purple-500">
+                            Sign Up
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Right side - Illustration -->
+        <div class="hidden lg:block relative w-0 flex-1 bg-purple-600 overflow-hidden">
+            <div class="absolute inset-0 flex items-center justify-center">
+                <!-- Decorative elements -->
+                <div class="absolute top-20 right-20 w-32 h-32 bg-white rounded-full opacity-10"></div>
+                <div class="absolute bottom-20 left-20 w-40 h-40 bg-white rounded-full opacity-10"></div>
+                <div class="absolute top-1/3 left-1/4 w-24 h-24 bg-white rounded-full opacity-10"></div>
+                
+                <!-- Main illustration -->
+                <div class="relative z-10 max-w-lg">
+                    <div class="relative">
+                        <!-- Phone -->
+                        <div class="w-64 h-96 bg-purple-800 rounded-3xl shadow-2xl transform rotate-3 mx-auto relative overflow-hidden">
+                            <div class="absolute inset-2 bg-purple-400 rounded-2xl overflow-hidden">
+                                <!-- Phone screen content -->
+                                <div class="absolute inset-0 flex flex-col">
+                                    <!-- Status bar -->
+                                    <div class="h-6 bg-purple-500 flex items-center justify-end px-2">
+                                        <div class="w-4 h-4 rounded-full bg-white opacity-50 mr-1"></div>
+                                        <div class="w-4 h-4 rounded-full bg-white opacity-50 mr-1"></div>
+                                        <div class="w-4 h-4 rounded-full bg-white opacity-50"></div>
+                                    </div>
+                                    
+                                    <!-- Content -->
+                                    <div class="flex-1 bg-purple-300 p-4 flex flex-col items-center justify-center">
+                                        <div class="w-24 h-24 bg-white rounded-full mb-4 flex items-center justify-center">
+                                            <div class="w-20 h-20 border-4 border-purple-500 rounded-full flex items-center justify-center">
+                                                <i class="fas fa-fingerprint text-purple-500 text-4xl"></i>
+                                            </div>
+                                        </div>
+                                        <div class="w-full h-2 bg-white rounded-full mb-2"></div>
+                                        <div class="text-center text-white text-xs">
+                                            Please tap your finger to your phone
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Phone notch -->
+                            <div class="absolute top-0 left-1/2 transform -translate-x-1/2 w-16 h-4 bg-purple-900 rounded-b-lg"></div>
+                        </div>
+                        
+                        <!-- Person -->
+                        <div class="absolute -bottom-10 -left-10">
+                            <div class="w-24 h-32 relative">
+                                <!-- Body -->
+                                <div class="absolute bottom-0 left-0 w-16 h-20 bg-yellow-400 rounded-t-lg transform rotate-12"></div>
+                                
+                                <!-- Head -->
+                                <div class="absolute top-0 left-8 w-12 h-12 bg-amber-800 rounded-full"></div>
+                                
+                                <!-- Arm -->
+                                <div class="absolute top-10 left-16 w-16 h-4 bg-yellow-400 rounded-full transform rotate-45"></div>
+                                
+                                <!-- Legs -->
+                                <div class="absolute bottom-0 left-4 w-6 h-12 bg-white rounded-t-lg transform rotate-12"></div>
+                                <div class="absolute bottom-0 left-10 w-6 h-10 bg-white rounded-t-lg transform -rotate-12"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Checkmark bubble -->
+                        <div class="absolute top-10 left-10 w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-lg">
+                            <i class="fas fa-check text-purple-600 text-2xl"></i>
+                        </div>
+                        
+                        <!-- Lock -->
+                        <div class="absolute bottom-10 right-10 w-16 h-20 flex flex-col items-center">
+                            <div class="w-10 h-10 border-4 border-white rounded-t-lg"></div>
+                            <div class="w-16 h-12 bg-white rounded-lg flex items-center justify-center">
+                                <div class="w-4 h-4 bg-purple-600 rounded-full"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Clouds -->
+                        <div class="absolute top-0 right-0 w-20 h-10 bg-white rounded-full opacity-70"></div>
+                        <div class="absolute top-5 right-10 w-16 h-8 bg-white rounded-full opacity-70"></div>
+                        <div class="absolute bottom-0 right-20 w-24 h-12 bg-white rounded-full opacity-70"></div>
+                        <div class="absolute bottom-10 left-20 w-20 h-10 bg-white rounded-full opacity-70"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <script>
+        // Toggle password visibility
+        document.getElementById('togglePassword').addEventListener('click', function() {
+            const passwordInput = document.getElementById('password');
+            const icon = this.querySelector('i');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        });
+    </script> -->
+
+   <script>
+    // Toggle password visibility
+    document.getElementById('togglePassword').addEventListener('click', function () {
+        const passwordInput = document.getElementById('password');
+        const icon = this.querySelector('i');
+
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            icon.classList.replace('fa-eye', 'fa-eye-slash');
+        } else {
+            passwordInput.type = 'password';
+            icon.classList.replace('fa-eye-slash', 'fa-eye');
+        }
+    });
+
+    // Form validation
+    document.querySelector('form').addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const email = document.getElementById('email');
+        const password = document.getElementById('password');
+
+        if (!email.value.trim() || !password.value.trim()) {
+            alert('Please fill in both email and password.');
+            return;
+        }
+
+        if (password.value.trim().length < 6) {
+            alert('Password must be at least 6 characters.');
+            return;
+        }
+
+        // Simulasi login berhasil
+        window.location.href = 'dashboard.html';
+    });
+</script>
+
+
+</body>
+</html>

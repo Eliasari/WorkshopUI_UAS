@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DIY: Upgrade Your Old Jeans | Rewear.co</title>
+    <!-- Tailwind CSS v3 CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts - Montserrat -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <!-- AOS Animation Library -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <!-- Custom Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'montserrat': ['Montserrat', 'sans-serif'],
+                    },
+                    colors: {
+                        'rewear': {
+                            'bg': '#ffffff',
+                            'text': '#000000',
+                            'footer': '#1e1f20',
+                            'highlight': '#eccdb4',
+                            'sale': '#fea1a1',
+                            'gray': '#f6f5f2',
+                            'card': '#f0edd4',
+                        }
+                    },
+                    animation: {
+                        'heartBeat': 'heartBeat 0.3s ease-out',
+                    },
+                    keyframes: {
+                        heartBeat: {
+                            '0%': { transform: 'scale(1)' },
+                            '50%': { transform: 'scale(1.2)' },
+                            '100%': { transform: 'scale(1)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom styles that are difficult to achieve with Tailwind alone */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Fix for iOS Safari 100vh issue */
+        @supports (-webkit-touch-callout: none) {
+            .h-screen {
+                height: -webkit-fill-available;
+            }
+        }
+        
+        /* Hide scrollbar but allow scrolling */
+        .hide-scrollbar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;  /* Chrome, Safari, Opera */
+        }
+        
+        /* Mobile menu animation */
+        .slide-in-left {
+            transform: translateX(-100%);
+            transition: transform 0.3s ease-out;
+        }
+        
+        .slide-in-left-active {
+            transform: translateX(0) !important;
+        }
+
+        /* Article content styling */
+        .article-content h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            color: #000;
+        }
+
+        .article-content h3 {
+            font-size: 1.35rem;
+            font-weight: 600;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: #000;
+        }
+
+        .article-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.8;
+            color: #333;
+            font-size: 1.05rem;
+        }
+
+        .article-content ul, .article-content ol {
+            margin-bottom: 1.25rem;
+            padding-left: 1.75rem;
+            color: #333;
+        }
+
+        .article-content ul {
+            list-style-type: disc;
+        }
+
+        .article-content ol {
+            list-style-type: decimal;
+        }
+
+        .article-content li {
+            margin-bottom: 0.75rem;
+            line-height: 1.7;
+        }
+
+        .article-content img {
+            margin: 2rem 0;
+            border-radius: 0.5rem;
+        }
+
+        .article-content blockquote {
+            border-left: 4px solid #000;
+            padding: 1rem 1.5rem;
+            font-style: italic;
+            margin: 2rem 0;
+            background-color: #f8f8f8;
+            color: #555;
+        }
+    </style>
+</head>
+<body class="font-montserrat bg-white text-black relative">
+    <div class="min-h-screen flex flex-col">
+        <!-- Mobile Navigation Sidebar -->
+        <div id="nav" class="fixed inset-0 z-30 pointer-events-none">
+            <div id="sidebar" class="bg-black w-full h-full p-8 transform -translate-x-full transition-transform duration-300 ease-out">
+                <button id="cross" class="mt-10 text-white">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18 6L6 18" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M6 6L18 18" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+                <a href="index.html" class="block text-center text-white text-xl font-bold mt-4">Rewear.co</a>
+                <ul class="mt-8 space-y-6">
+                    <li><a href="collection.html" class="block text-white text-lg font-semibold">Collection</a></li>
+                    <li><a href="product.html" class="block text-white text-lg font-semibold">Product</a></li>
+                    <li><a href="redesign.html" class="block text-white text-lg font-semibold">Redesign</a></li>
+                    <li><a href="articles.html" class="block text-white text-lg font-semibold">Tailor's Guide</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Navigation -->
+        <nav class="flex justify-between items-center px-8 py-8 md:py-6 md:px-16">
+            <!-- Desktop Menu -->
+            <div class="hidden md:block">
+                <ul class="flex space-x-6">
+                    <li data-aos="fade-right" data-aos-duration="500" data-aos-delay="200">
+                        <a href="collection.html" class="text-rewear-text hover:opacity-70 transition-opacity">Collection</a>
+                    </li>
+                    <li data-aos="fade-right" data-aos-duration="500" data-aos-delay="300">
+                        <a href="product.html" class="text-rewear-text hover:opacity-70 transition-opacity">Product</a>
+                    </li>
+                    <li data-aos="fade-right" data-aos-duration="500" data-aos-delay="400">
+                        <a href="redesign.html" class="text-rewear-text hover:opacity-70 transition-opacity">Redesign</a>
+                    </li>
+                     <li data-aos="fade-right" data-aos-duration="500" data-aos-delay="500">
+                        <a href="articles.html" class="text-rewear-text hover:opacity-70 transition-opacity">Tailor's Guide</a>
+                    </li>
+                    <li data-aos="fade-right" data-aos-duration="500" data-aos-delay="500">
+                        <a href="history.html" class="text-rewear-text hover:opacity-70 transition-opacity">History</a>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Logo and Mobile Menu Button -->
+            <div class="flex items-center">
+                <button id="hamburger" class="md:hidden mr-4" data-aos="fade-right" data-aos-duration="500" data-aos-delay="300">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M3 12H21" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M3 6H21" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M3 18H21" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+                <a href="index.html" class="text-xl md:text-2xl font-bold" data-aos="fade-up" data-aos-duration="500" data-aos-delay="200">Rewear.co</a>
+            </div>
+            
+            <!-- Right Actions -->
+            <div class="flex items-center space-x-4 md:space-x-6">
+                <!-- Desktop Search -->
+                <div class="hidden md:flex items-center border border-rewear-text px-4 py-2" data-aos="fade-left" data-aos-duration="500" data-aos-delay="400">
+                    <svg width="16" height="16" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M16.031 14.617L20.314 18.899L18.899 20.314L14.617 16.031C13.0237 17.3082 11.042 18.0029 9 18C4.032 18 0 13.968 0 9C0 4.032 4.032 0 9 0C13.968 0 18 4.032 18 9C18.0029 11.042 17.3082 13.0237 16.031 14.617ZM14.025 13.875C15.2938 12.5697 16.0025 10.8204 16 9C16 5.133 12.867 2 9 2C5.133 2 2 5.133 2 9C2 12.867 5.133 16 9 16C10.8204 16.0025 12.5697 15.2938 13.875 14.025L14.025 13.875Z" fill="#000"/>
+                    </svg>
+                    <input type="text" placeholder="Search" class="bg-transparent ml-2 outline-none w-40">
+                </div>
+                
+                <!-- Mobile Search Button -->
+                <button class="md:hidden" data-aos="fade-left" data-aos-duration="500" data-aos-delay="350" onclick="searching()">
+                    <svg width="20" height="20" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M16.031 14.617L20.314 18.899L18.899 20.314L14.617 16.031C13.0237 17.3082 11.042 18.0029 9 18C4.032 18 0 13.968 0 9C0 4.032 4.032 0 9 0C13.968 0 18 4.032 18 9C18.0029 11.042 17.3082 13.0237 16.031 14.617ZM14.025 13.875C15.2938 12.5697 16.0025 10.8204 16 9C16 5.133 12.867 2 9 2C5.133 2 2 5.133 2 9C2 12.867 5.133 16 9 16C10.8204 16.0025 12.5697 15.2938 13.875 14.025L14.025 13.875Z" fill="#000"/>
+                    </svg>
+                </button>
+                
+                <!-- Bag Icon -->
+                <a href="bag.html" data-aos="fade-left" data-aos-duration="500" data-aos-delay="350">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6 2L3 6V20C3 20.5304 3.21071 21.0391 3.58579 21.4142C3.96086 21.7893 4.46957 22 5 22H19C19.5304 22 20.0391 21.7893 20.4142 21.4142C20.7893 21.0391 21 20.5304 21 20V6L18 2H6Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M3 6H21" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M16 10C16 11.0609 15.5786 12.0783 14.8284 12.8284C14.0783 13.5786 13.0609 14 12 14C10.9391 14 9.92172 13.5786 9.17157 12.8284C8.42143 12.0783 8 11.0609 8 10" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
+                
+                <!-- Wishlist Icon -->
+                <a href="wishlist.html" data-aos="fade-left" data-aos-duration="500" data-aos-delay="300">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="black"/>
+                    </svg>
+                </a>
+                
+                <!-- Profile Icon -->
+                <a href="login.html" data-aos="fade-left" data-aos-duration="500" data-aos-delay="300">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M12 11C14.2091 11 16 9.20914 16 7C16 4.79086 14.2091 3 12 3C9.79086 3 8 4.79086 8 7C8 9.20914 9.79086 11 12 11Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
+            </div>
+        </nav>
+        
+        <!-- Mobile Search Bar -->
+        <div class="px-8 mb-6 md:hidden">
+            <div id="searchBar" class="hidden items-center border border-rewear-text h-12 px-4">
+                <svg width="20" height="20" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M16.031 14.617L20.314 18.899L18.899 20.314L14.617 16.031C13.0237 17.3082 11.042 18.0029 9 18C4.032 18 0 13.968 0 9C0 4.032 4.032 0 9 0C13.968 0 18 4.032 18 9C18.0029 11.042 17.3082 13.0237 16.031 14.617ZM14.025 13.875C15.2938 12.5697 16.0025 10.8204 16 9C16 5.133 12.867 2 9 2C5.133 2 2 5.133 2 9C2 12.867 5.133 16 9 16C10.8204 16.0025 12.5697 15.2938 13.875 14.025L14.025 13.875Z" fill="#000"/>
+                </svg>
+                <input type="text" placeholder="Search" class="bg-transparent ml-2 outline-none w-full">
+            </div>
+        </div>
+
+        <!-- Breadcrumb -->
+        <div class="px-8 md:px-16 pt-2 mb-5 md:mb-8">
+            <div class="flex text-sm md:text-base gap-1">
+                <a href="index.html" class="text-rewear-text hover:opacity-70 transition-opacity">Home</a>
+                <span>/</span>
+                <a href="articles.html" class="text-rewear-text hover:opacity-70 transition-opacity">Tailor's Guide</a>
+                <span>/</span>
+                <span>DIY: Upgrade Your Old Jeans</span>
+            </div>
+        </div>
+
+        <!-- Article Content -->
+        <div class="px-8 md:px-16 mb-16">
+            <div class="max-w-4xl mx-auto">
+                <!-- Article Header -->
+                <div class="mb-8" data-aos="fade-up" data-aos-duration="800">
+                    <h1 class="text-3xl md:text-4xl font-bold mb-4">DIY: Upgrade Your Old Jeans</h1>
+                    <div class="flex flex-wrap items-center text-sm text-gray-500 mb-6">
+                        <span>May 15, 2023</span>
+                        <span class="mx-2">•</span>
+                        <span>DIY Fashion</span>
+                        <span class="mx-2">•</span>
+                        <span>By Sarah Johnson</span>
+                    </div>
+                    <img src="./assets/image/edukasi1.jpg" alt="DIY Jeans Upgrade" class="w-full h-auto rounded-lg object-cover mb-6">
+                </div>
+
+                <!-- Article Body -->
+                <div class="article-content text-black leading-relaxed" data-aos="fade-up" data-aos-duration="500">
+                    <p>
+                        Do you have a pair of jeans that no longer fit or have seen better days? Don't throw them away! With a few simple techniques, you can transform your worn-out jeans into stylish shorts, skirts, or even tote bags. This guide will walk you through several creative ways to give your old denim a second life.
+                    </p>
+
+                    <h2>Why Upcycle Your Jeans?</h2>
+                    <p>
+                        The fashion industry is one of the largest polluters in the world. By upcycling your old clothes, you're not only saving money but also reducing waste and your environmental footprint. Plus, you'll end up with unique pieces that reflect your personal style!
+                    </p>
+
+                    <blockquote>
+                        "The most sustainable garment is the one already in your wardrobe." - Fashion Revolution
+                    </blockquote>
+
+                    <h2>What You'll Need</h2>
+                    <ul>
+                        <li>Old jeans</li>
+                        <li>Fabric scissors</li>
+                        <li>Measuring tape</li>
+                        <li>Chalk or fabric marker</li>
+                        <li>Sewing machine (optional)</li>
+                        <li>Needle and thread</li>
+                        <li>Sandpaper (for distressing)</li>
+                        <li>Decorative elements (patches, studs, embroidery thread, etc.)</li>
+                    </ul>
+
+                    <h2>Project 1: Denim Shorts</h2>
+                    <p>
+                        Transform your full-length jeans into stylish shorts perfect for summer.
+                    </p>
+
+                    <h3>Step-by-Step Instructions:</h3>
+                    <ol>
+                        <li>Try on your jeans and mark where you want them to end with chalk.</li>
+                        <li>Take them off and lay them flat on a surface.</li>
+                        <li>Add 1-2 inches to your marked length (for cuffing or hemming).</li>
+                        <li>Cut straight across both legs.</li>
+                        <li>For a raw edge look, you're done! For a cleaner finish, fold the edge twice and stitch around.</li>
+                        <li>Optional: Add distressing by rubbing sandpaper on areas you want to look worn.</li>
+                    </ol>
+
+                    <p>
+                        For a trendy look, try adding some fraying to the edges or patches to the front or back pockets. You can also add studs, embroidery, or paint for a more personalized touch.
+                    </p>
+
+                    <h2>Project 2: Denim Skirt</h2>
+                    <p>
+                        Turn your jeans into a fashionable skirt with these simple steps.
+                    </p>
+
+                    <h3>Step-by-Step Instructions:</h3>
+                    <ol>
+                        <li>Cut the inside seams of both legs from the crotch to the hem.</li>
+                        <li>Cut off the front zipper section, leaving the waistband intact.</li>
+                        <li>Lay the jeans flat with the back centered.</li>
+                        <li>Cut a piece of denim from the legs to fill in the front gap.</li>
+                        <li>Pin and sew the new piece in place.</li>
+                        <li>Hem the bottom edge for a finished look.</li>
+                    </ol>
+
+                    <p>
+                        This project works best with wider-leg jeans as they provide more fabric to work with. You can customize your skirt by adding a slit, decorative buttons, or embroidery.
+                    </p>
+
+                    <h2>Project 3: Denim Tote Bag</h2>
+                    <p>
+                        Create a sturdy, eco-friendly shopping bag from your old jeans.
+                    </p>
+
+                    <h3>Step-by-Step Instructions:</h3>
+                    <ol>
+                        <li>Cut off the legs of your jeans just below the crotch.</li>
+                        <li>Turn the top portion inside out and sew across the bottom to close it.</li>
+                        <li>From the cut-off legs, create two long strips for handles.</li>
+                        <li>Attach the handles to the inside of the bag, making sure they're secure.</li>
+                        <li>Turn the bag right side out and add any decorative elements.</li>
+                    </ol>
+
+                    <p>
+                        This bag is perfect for grocery shopping or as a casual day bag. The pockets of the jeans become functional storage spaces in your new tote!
+                    </p>
+
+                    <h2>Tips for Success</h2>
+                    <ul>
+                        <li>Always measure twice, cut once.</li>
+                        <li>Wash your jeans before starting any project.</li>
+                        <li>Use sharp scissors specifically designed for fabric.</li>
+                        <li>Start with less expensive or already damaged jeans for your first project.</li>
+                        <li>Save all scraps for future projects or patches.</li>
+                    </ul>
+
+                    <h2>Conclusion</h2>
+                    <p>
+                        Upcycling your old jeans is a creative, eco-friendly way to refresh your wardrobe. With these simple projects, you can transform outdated or worn denim into fashionable new pieces that reflect your personal style while reducing textile waste.
+                    </p>
+
+                    <p>
+                        Ready to give it a try? Share your creations with us on social media using #RewearDenim!
+                    </p>
+                </div>
+
+                <!-- Author Bio -->
+                <div class="mt-12 p-6 bg-gray-100 rounded-lg" data-aos="fade-up" data-aos-duration="500">
+                    <div class="flex items-center">
+                        <img src="./assets/image/people1.jpg" alt="Sarah Johnson" class="w-16 h-16 rounded-full object-cover">
+                        <div class="ml-4">
+                            <h3 class="font-bold text-lg text-black">Sarah Johnson</h3>
+                            <p class="text-gray-700">Sustainable Fashion Expert</p>
+                        </div>
+                    </div>
+                    <p class="mt-4 text-gray-800">
+                        Sarah is a sustainable fashion advocate with over 10 years of experience in the fashion industry. She specializes in upcycling techniques and runs workshops teaching people how to extend the life of their clothing.
+                    </p>
+                </div>
+
+                <!-- Share Buttons -->
+                <div class="mt-8 flex items-center" data-aos="fade-up" data-aos-duration="500">
+                    <span class="mr-4 font-medium">Share this article:</span>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-[#3b5998] flex items-center justify-center text-white">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-[#1da1f2] flex items-center justify-center text-white">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-[#0077b5] flex items-center justify-center text-white">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-[#25D366] flex items-center justify-center text-white">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Related Articles -->
+                <div class="mt-16" data-aos="fade-up" data-aos-duration="500">
+                    <h2 class="text-2xl font-bold mb-6 uppercase">You Might Also Like</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <!-- Related Article 1 -->
+                        <a href="article-detail.html" class="block group">
+                            <div class="overflow-hidden rounded-lg">
+                                <img src="./assets/image/edukasi2.jpg" alt="T-Shirt Remake" class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110">
+                            </div>
+                            <h3 class="mt-3 font-semibold group-hover:underline text-black">T-Shirt Remake: From Basic to Trendy</h3>
+                        </a>
+                        
+                        <!-- Related Article 2 -->
+                        <a href="article-detail.html" class="block group">
+                            <div class="overflow-hidden rounded-lg">
+                                <img src="./assets/image/edukasi3.jpg" alt="Revamp Vintage Dresses" class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110">
+                            </div>
+                            <h3 class="mt-3 font-semibold group-hover:underline text-black">Revamp Vintage Dresses</h3>
+                        </a>
+                        
+                        <!-- Related Article 3 -->
+                        <a href="article-detail.html" class="block group">
+                            <div class="overflow-hidden rounded-lg">
+                                <img src="./assets/image/edukasi4.webp" alt="Patchwork Creativity" class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110">
+                            </div>
+                            <h3 class="mt-3 font-semibold group-hover:underline text-black">Patchwork Creativity</h3>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Newsletter Section -->
+        <div class="bg-gray-100 py-16 px-8 md:px-16 mb-16" data-aos="fade-up" data-aos-duration="800">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 uppercase">Subscribe to Our Newsletter</h2>
+                <p class="text-gray-700 mb-8 max-w-2xl mx-auto uppercase">
+                    Get the latest upcycling tips, DIY tutorials, and sustainable fashion ideas delivered straight to your inbox.
+                </p>
+                <div class="flex flex-col md:flex-row gap-4 max-w-xl mx-auto">
+                    <input type="email" placeholder="YOUR EMAIL ADDRESS" class="flex-grow px-4 py-3 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-black uppercase">
+                    <button class="bg-black text-white px-6 py-3 font-medium hover:bg-gray-800 transition-colors uppercase">Subscribe</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="bg-rewear-footer text-white py-12 mt-auto">
+            <div class="grid grid-cols-2 md:grid-cols-5 px-8 md:px-32 gap-y-8">
+                <!-- Column 1 -->
+                <div class="col-span-1" data-aos="fade-up" data-aos-duration="500" data-aos-delay="400">
+                    <h3 class="text-lg font-semibold mb-4 uppercase">Rewear</h3>
+                    <ul class="space-y-3 uppercase">
+                        <li><a href="location.html" class="hover:text-gray-300 transition-colors">Location</a></li>
+                        <li><a href="about.html" class="hover:text-gray-300 transition-colors">About Us</a></li>
+                        <li class="cursor-pointer hover:text-gray-300 transition-colors" onclick="togglePopup(true)">Contact Us</li>
+                    </ul>
+                </div>
+                
+                <!-- Column 2 -->
+                <div class="col-span-1" data-aos="fade-up" data-aos-duration="500" data-aos-delay="500">
+                    <h3 class="text-lg font-semibold mb-4 uppercase">Help</h3>
+                    <ul class="space-y-3 uppercase">
+                        <li class="cursor-pointer hover:text-gray-300 transition-colors" onclick="togglePopup(true)">FAQ</li>
+                        <li class="cursor-pointer hover:text-gray-300 transition-colors" onclick="togglePopup(true)">Payment</li>
+                        <li class="cursor-pointer hover:text-gray-300 transition-colors" onclick="togglePopup(true)">Privacy and Policy</li>
+                    </ul>
+                </div>
+                
+                <!-- Column 3 -->
+                <div class="col-span-1" data-aos="fade-up" data-aos-duration="500" data-aos-delay="600">
+                    <h3 class="text-lg font-semibold mb-4 uppercase">Customer</h3>
+                    <ul class="space-y-3 uppercase">
+                        <li class="cursor-pointer hover:text-gray-300 transition-colors" onclick="togglePopup(true)">Voucher</li>
+                        <li class="cursor-pointer hover:text-gray-300 transition-colors" onclick="togglePopup(true)">Order Track</li>
+                    </ul>
+                </div>
+                
+                <!-- Column 4 -->
+                <div class="col-span-1" data-aos="fade-up" data-aos-duration="500" data-aos-delay="700">
+                    <h3 class="text-lg font-semibold mb-4 uppercase">Products</h3>
+                    <ul class="space-y-3 uppercase">
+                        <li class="cursor-pointer hover:text-gray-300 transition-colors" onclick="togglePopup(true)">Sale</li>
+                        <li><a href="collection.html" class="hover:text-gray-300 transition-colors">New Collections</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Column 5 - Social -->
+                <div class="col-span-2 md:col-span-1 flex flex-col items-center md:items-start" data-aos="fade-up" data-aos-duration="500" data-aos-delay="800">
+                    <a href="index.html" class="text-xl font-bold mb-2 uppercase">Rewear.co</a>
+                    <h3 class="text-base font-semibold mb-4 uppercase">Follow Us</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-white flex items-center justify-center">
+                            <i class="fab fa-instagram text-rewear-footer"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white flex items-center justify-center">
+                            <i class="fab fa-facebook-f text-rewear-footer"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white flex items-center justify-center">
+                            <i class="fab fa-youtube text-rewear-footer"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white flex items-center justify-center">
+                            <i class="fab fa-tiktok text-rewear-footer"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Popup -->
+    <div id="popup" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white p-6 rounded-lg shadow-lg w-80 text-center">
+            <img src="assets/icons/gear-512.png" alt="Loading" class="w-24 h-24 mx-auto animate-spin">
+            <h2 class="text-xl font-bold mt-4 mb-2 text-black">Coming Soon</h2>
+            <p class="mb-4 text-gray-700">This feature is not available yet.</p>
+            <button onclick="togglePopup(false)" class="bg-red-500 text-white px-4 py-2 rounded text-sm">Close</button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+
+        // Navigation functions
+        const hamburger = document.getElementById('hamburger');
+        const cross = document.getElementById('cross');
+        const sidebar = document.getElementById('sidebar');
+        const nav = document.getElementById('nav');
+
+        hamburger.addEventListener('click', function() {
+            nav.style.pointerEvents = 'all';
+            sidebar.classList.add('translate-x-0');
+            sidebar.classList.remove('-translate-x-full');
+        });
+
+        cross.addEventListener('click', function() {
+            sidebar.classList.remove('translate-x-0');
+            sidebar.classList.add('-translate-x-full');
+            setTimeout(() => {
+                nav.style.pointerEvents = 'none';
+            }, 300);
+        });
+
+        function togglePopup(show) {
+            const popup = document.getElementById('popup');
+            popup.style.display = show ? 'flex' : 'none';
+        }
+
+        function searching() {
+            const searchBar = document.getElementById('searchBar');
+            searchBar.style.display = searchBar.style.display === 'flex' ? 'none' : 'flex';
+        }
+    </script>
+</body>
+</html>

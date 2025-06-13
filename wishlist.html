@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wishlist - Rewear.co</title>
+    <!-- Tailwind CSS v3 CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts - Montserrat -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <!-- AOS Animation Library -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <!-- Custom Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'montserrat': ['Montserrat', 'sans-serif'],
+                    },
+                    colors: {
+                        'rewear': {
+                            'bg': '#ffffff',
+                            'text': '#000000',
+                            'footer': '#1e1f20',
+                            'highlight': '#eccdb4',
+                            'sale': '#e53e3e',
+                            'gray': '#f6f5f2',
+                            'card': '#f0edd4',
+                        }
+                    },
+                    animation: {
+                        'heartBeat': 'heartBeat 0.3s ease-out',
+                        'fadeIn': 'fadeIn 0.5s ease-in',
+                    },
+                    keyframes: {
+                        heartBeat: {
+                            '0%': { transform: 'scale(1)' },
+                            '50%': { transform: 'scale(1.2)' },
+                            '100%': { transform: 'scale(1)' },
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom styles that are difficult to achieve with Tailwind alone */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Fix for iOS Safari 100vh issue */
+        @supports (-webkit-touch-callout: none) {
+            .h-screen {
+                height: -webkit-fill-available;
+            }
+        }
+        
+        /* Hide scrollbar but allow scrolling */
+        .hide-scrollbar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;  /* Chrome, Safari, Opera */
+        }
+        
+        /* Heart icon animation */
+        .heart-active {
+            fill: #e53e3e;
+            stroke: #e53e3e;
+            animation: heartBeat 0.3s ease-out;
+        }
+        
+        .heart-inactive {
+            fill: none;
+            stroke: #000;
+            transition: all 0.2s ease;
+        }
+        
+        .heart-inactive:hover {
+            transform: scale(1.1);
+        }
+
+        /* Wishlist item hover effect */
+        .wishlist-item {
+            transition: all 0.3s ease;
+        }
+        
+        .wishlist-item:hover {
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+<body class="font-montserrat bg-white text-rewear-text relative">
+    <div class="min-h-screen flex flex-col">
+        <!-- Mobile Navigation Sidebar -->
+        <div id="nav" class="fixed inset-0 z-30 pointer-events-none">
+            <div id="sidebar" class="bg-black w-full h-full p-8 transform -translate-x-full transition-transform duration-300 ease-out">
+                <button id="cross" class="mt-10 text-white">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18 6L6 18" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M6 6L18 18" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+                <a href="index.html" class="block text-center text-white text-xl font-bold mt-4">Rewear.co</a>
+                <ul class="mt-8 space-y-6">
+                    <li><a href="collection.html" class="block text-white text-lg font-semibold">Collection</a></li>
+                    <li><a href="product.html" class="block text-white text-lg font-semibold">Product</a></li>
+                    <li><a href="redesign.html" class="block text-white text-lg font-semibold">Redesign</a></li>
+                    <li><a href="articles.html" class="block text-white text-lg font-semibold">Tailor's Guide</a></li>
+                    <li><a href="history.html" class="block text-white text-lg font-semibold">History</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Navigation -->
+        <nav class="flex justify-between items-center px-8 py-8 md:py-6 md:px-16">
+            <!-- Desktop Menu -->
+            <div class="hidden md:block">
+                <ul class="flex space-x-6">
+                    <li data-aos="fade-right" data-aos-duration="500" data-aos-delay="200">
+                        <a href="collection.html" class="text-rewear-text hover:opacity-70 transition-opacity">Collection</a>
+                    </li>
+                    <li data-aos="fade-right" data-aos-duration="500" data-aos-delay="300">
+                        <a href="product.html" class="text-rewear-text hover:opacity-70 transition-opacity">Product</a>
+                    </li>
+                    <li data-aos="fade-right" data-aos-duration="500" data-aos-delay="400">
+                        <a href="redesign.html" class="text-rewear-text hover:opacity-70 transition-opacity">Redesign</a>
+                    </li>
+                   <li data-aos="fade-right" data-aos-duration="500" data-aos-delay="500">
+                        <a href="articles.html" class="text-rewear-text hover:opacity-70 transition-opacity">Tailor's Guide</a>
+                    </li>
+                    <li data-aos="fade-right" data-aos-duration="500" data-aos-delay="500">
+                        <a href="history.html" class="text-rewear-text hover:opacity-70 transition-opacity">History</a>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Logo and Mobile Menu Button -->
+            <div class="flex items-center">
+                <button id="hamburger" class="md:hidden mr-4" data-aos="fade-right" data-aos-duration="500" data-aos-delay="300">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M3 12H21" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M3 6H21" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M3 18H21" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+                <a href="index.html" class="text-xl md:text-2xl font-bold" data-aos="fade-up" data-aos-duration="500" data-aos-delay="200">Rewear.co</a>
+            </div>
+            
+            <!-- Right Actions -->
+            <div class="flex items-center space-x-4 md:space-x-6">
+                <!-- Desktop Search -->
+                <div class="hidden md:flex items-center border border-rewear-text px-4 py-2" data-aos="fade-left" data-aos-duration="500" data-aos-delay="400">
+                    <svg width="16" height="16" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M16.031 14.617L20.314 18.899L18.899 20.314L14.617 16.031C13.0237 17.3082 11.042 18.0029 9 18C4.032 18 0 13.968 0 9C0 4.032 4.032 0 9 0C13.968 0 18 4.032 18 9C18.0029 11.042 17.3082 13.0237 16.031 14.617ZM14.025 13.875C15.2938 12.5697 16.0025 10.8204 16 9C16 5.133 12.867 2 9 2C5.133 2 2 5.133 2 9C2 12.867 5.133 16 9 16C10.8204 16.0025 12.5697 15.2938 13.875 14.025L14.025 13.875Z" fill="#000"/>
+                    </svg>
+                    <input type="text" placeholder="Search" class="bg-transparent ml-2 outline-none w-40">
+                </div>
+                
+                <!-- Mobile Search Button -->
+                <button class="md:hidden" data-aos="fade-left" data-aos-duration="500" data-aos-delay="350" onclick="searching()">
+                    <svg width="20" height="20" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M16.031 14.617L20.314 18.899L18.899 20.314L14.617 16.031C13.0237 17.3082 11.042 18.0029 9 18C4.032 18 0 13.968 0 9C0 4.032 4.032 0 9 0C13.968 0 18 4.032 18 9C18.0029 11.042 17.3082 13.0237 16.031 14.617ZM14.025 13.875C15.2938 12.5697 16.0025 10.8204 16 9C16 5.133 12.867 2 9 2C5.133 2 2 5.133 2 9C2 12.867 5.133 16 9 16C10.8204 16.0025 12.5697 15.2938 13.875 14.025L14.025 13.875Z" fill="#000"/>
+                    </svg>
+                </button>
+                
+                <!-- Bag Icon -->
+                <a href="bag.html" data-aos="fade-left" data-aos-duration="500" data-aos-delay="350">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6 2L3 6V20C3 20.5304 3.21071 21.0391 3.58579 21.4142C3.96086 21.7893 4.46957 22 5 22H19C19.5304 22 20.0391 21.7893 20.4142 21.4142C20.7893 21.0391 21 20.5304 21 20V6L18 2H6Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M3 6H21" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M16 10C16 11.0609 15.5786 12.0783 14.8284 12.8284C14.0783 13.5786 13.0609 14 12 14C10.9391 14 9.92172 13.5786 9.17157 12.8284C8.42143 12.0783 8 11.0609 8 10" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
+                
+                <!-- Wishlist Icon -->
+                <a href="wishlist.html" class="relative" data-aos="fade-left" data-aos-duration="500" data-aos-delay="300">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="#e53e3e"/>
+                    </svg>
+                    <span class="absolute -top-2 -right-2 bg-rewear-sale text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">3</span>
+                </a>
+                
+                <!-- Profile Icon -->
+                <a href="login.html" data-aos="fade-left" data-aos-duration="500" data-aos-delay="300">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M12 11C14.2091 11 16 9.20914 16 7C16 4.79086 14.2091 3 12 3C9.79086 3 8 4.79086 8 7C8 9.20914 9.79086 11 12 11Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
+            </div>
+        </nav>
+        
+        <!-- Mobile Search Bar -->
+        <div class="px-8 mb-6 md:hidden">
+            <div id="searchBar" class="hidden items-center border border-rewear-text h-12 px-4">
+                <svg width="20" height="20" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M16.031 14.617L20.314 18.899L18.899 20.314L14.617 16.031C13.0237 17.3082 11.042 18.0029 9 18C4.032 18 0 13.968 0 9C0 4.032 4.032 0 9 0C13.968 0 18 4.032 18 9C18.0029 11.042 17.3082 13.0237 16.031 14.617ZM14.025 13.875C15.2938 12.5697 16.0025 10.8204 16 9C16 5.133 12.867 2 9 2C5.133 2 2 5.133 2 9C2 12.867 5.133 16 9 16C10.8204 16.0025 12.5697 15.2938 13.875 14.025L14.025 13.875Z" fill="#000"/>
+                </svg>
+                <input type="text" placeholder="Search" class="bg-transparent ml-2 outline-none w-full">
+            </div>
+        </div>
+
+        <!-- Breadcrumb -->
+        <div class="px-8 md:px-16 py-4">
+            <ul class="flex items-center space-x-2 text-sm">
+                <li data-aos="fade-right" data-aos-duration="500" data-aos-delay="200">
+                    <a href="index.html" class="hover:underline">Home</a>
+                </li>
+                <li data-aos="fade-right" data-aos-duration="500" data-aos-delay="200">/</li>
+                <li data-aos="fade-right" data-aos-duration="500" data-aos-delay="300" class="font-medium">My Wishlist</li>
+            </ul>
+        </div>
+
+        <!-- Wishlist Header -->
+        <div class="px-8 md:px-16 mb-8">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center">
+                <div>
+                    <h1 class="text-2xl md:text-3xl font-bold" data-aos="fade-up" data-aos-duration="500">My Wishlist</h1>
+                    <p class="text-gray-500 mt-2" data-aos="fade-up" data-aos-duration="500" data-aos-delay="100">Items you've saved for later</p>
+                </div>
+                <div class="mt-4 md:mt-0 flex space-x-4" data-aos="fade-left" data-aos-duration="500" data-aos-delay="200">
+                    <button class="text-sm md:text-base text-gray-500 hover:text-black transition-colors flex items-center">
+                        <svg class="w-4 h-4 mr-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M8.684 13.342C8.886 13.524 9 13.775 9 14.033V20C9 20.384 9.267 20.72 9.646 20.866C10.02 21.01 10.457 20.937 10.764 20.673L13 18.202L15.236 20.673C15.543 20.937 15.98 21.01 16.354 20.866C16.733 20.72 17 20.384 17 20V14.033C17 13.775 17.114 13.524 17.316 13.342L21.405 9.658C21.789 9.312 22 8.84 22 8.344V7C22 5.895 21.105 5 20 5H4C2.895 5 2 5.895 2 7V8.344C2 8.84 2.211 9.312 2.595 9.658L6.684 13.342Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        Share Wishlist
+                    </button>
+                    <button class="text-sm md:text-base text-gray-500 hover:text-black transition-colors" id="clearWishlist">
+                        Clear All
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="px-8 md:px-16 mb-16">
+            <!-- Wishlist Tabs -->
+            <div class="border-b border-gray-200 mb-8" data-aos="fade-up" data-aos-duration="500">
+                <div class="flex space-x-8">
+                    <button class="py-4 border-b-2 border-black font-medium text-black">All Items (3)</button>
+                    <button class="py-4 border-b-2 border-transparent text-gray-500 hover:text-black transition-colors">On Sale</button>
+                    <button class="py-4 border-b-2 border-transparent text-gray-500 hover:text-black transition-colors">Recently Added</button>
+                </div>
+            </div>
+
+            <!-- Wishlist Content -->
+            <div class="flex flex-col lg:flex-row gap-8">
+                <!-- Wishlist Items -->
+                <div class="w-full lg:w-3/4">
+                    <!-- Wishlist Controls -->
+                    <div class="flex justify-between items-center mb-6" data-aos="fade-up" data-aos-duration="500" data-aos-delay="200">
+                        <div class="flex items-center">
+                            <a href="detail.html" id="addAllToCart" class="px-4 py-2 bg-black text-white text-sm hover:bg-gray-800 transition-colors rounded-md inline-block">Add All to Cart</a>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="mr-2 text-sm text-gray-500">Sort by:</span>
+                            <select class="border-b border-gray-300 py-1 pr-8 bg-transparent text-sm focus:outline-none">
+                                <option>Date Added: Newest First</option>
+                                <option>Date Added: Oldest First</option>
+                                <option>Price: High to Low</option>
+                                <option>Price: Low to High</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Wishlist Items Grid -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="wishlistItems">
+                        <!-- Item 1 -->
+                        <div class="wishlist-item bg-white rounded-xl overflow-hidden shadow-sm" data-aos="fade-up" data-aos-duration="500" data-aos-delay="300">
+                            <div class="relative">
+                                <img src="assets/images/cloth-1.png" alt="Semi Kemeja Cream" class="w-full h-64 object-cover">
+                                <button class="wishlist-toggle absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-sm">
+                                    <svg class="w-5 h-5 heart-active" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
+                                <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent h-16 opacity-70"></div>
+                                <div class="absolute bottom-3 left-3">
+                                    <span class="bg-rewear-sale text-white text-xs px-2 py-1 rounded-full">50% OFF</span>
+                                </div>
+                            </div>
+                            <div class="p-5">
+                                <h3 class="font-semibold text-lg mb-1">Semi Kemeja Cream</h3>
+                                <p class="text-gray-500 text-sm mb-3">Shirt</p>
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="flex items-center space-x-2">
+                                        <span class="font-bold">Rp. 175.000</span>
+                                        <span class="text-gray-500 line-through text-sm">Rp. 350.000</span>
+                                    </div>
+                                </div>
+                                <div class="flex space-x-2">
+                                    <a href="detail.html" class="flex-1 text-center py-2 border border-black text-sm hover:bg-gray-100 transition-colors rounded-md">View</a>
+                                    <a href="detail.html" class="flex-1 bg-black text-white py-2 text-sm hover:bg-gray-800 transition-colors rounded-md text-center">Add to Cart</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Item 2 -->
+                        <div class="wishlist-item bg-white rounded-xl overflow-hidden shadow-sm" data-aos="fade-up" data-aos-duration="500" data-aos-delay="400">
+                            <div class="relative">
+                                <img src="assets/images/cloth-2.png" alt="Bando Rajut" class="w-full h-64 object-cover">
+                                <button class="wishlist-toggle absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-sm">
+                                    <svg class="w-5 h-5 heart-active" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
+                                <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent h-16 opacity-70"></div>
+                                <div class="absolute bottom-3 left-3">
+                                    <span class="bg-rewear-sale text-white text-xs px-2 py-1 rounded-full">50% OFF</span>
+                                </div>
+                            </div>
+                            <div class="p-5">
+                                <h3 class="font-semibold text-lg mb-1">Bando Rajut</h3>
+                                <p class="text-gray-500 text-sm mb-3">Accessories</p>
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="flex items-center space-x-2">
+                                        <span class="font-bold">Rp. 175.000</span>
+                                        <span class="text-gray-500 line-through text-sm">Rp. 350.000</span>
+                                    </div>
+                                </div>
+                                <div class="flex space-x-2">
+                                    <a href="detail.html" class="flex-1 text-center py-2 border border-black text-sm hover:bg-gray-100 transition-colors rounded-md">View</a>
+                                    <a href="detail.html" class="flex-1 bg-black text-white py-2 text-sm hover:bg-gray-800 transition-colors rounded-md text-center">Add to Cart</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Item 3 -->
+                        <div class="wishlist-item bg-white rounded-xl overflow-hidden shadow-sm" data-aos="fade-up" data-aos-duration="500" data-aos-delay="500">
+                            <div class="relative">
+                                <img src="assets/images/cloth-5.png" alt="Handmade Cute Knitted Vest" class="w-full h-64 object-cover">
+                                <button class="wishlist-toggle absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-sm">
+                                    <svg class="w-5 h-5 heart-active" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
+                                <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent h-16 opacity-70"></div>
+                                <div class="absolute bottom-3 left-3">
+                                    <span class="bg-rewear-sale text-white text-xs px-2 py-1 rounded-full">50% OFF</span>
+                                </div>
+                            </div>
+                            <div class="p-5">
+                                <h3 class="font-semibold text-lg mb-1">Handmade Cute Knitted Vest</h3>
+                                <p class="text-gray-500 text-sm mb-3">Outerwear</p>
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="flex items-center space-x-2">
+                                        <span class="font-bold">Rp. 175.000</span>
+                                        <span class="text-gray-500 line-through text-sm">Rp. 350.000</span>
+                                    </div>
+                                </div>
+                                <div class="flex space-x-2">
+                                    <a href="detail.html" class="flex-1 text-center py-2 border border-black text-sm hover:bg-gray-100 transition-colors rounded-md">View</a>
+                                    <a href="detail.html" class="flex-1 bg-black text-white py-2 text-sm hover:bg-gray-800 transition-colors rounded-md text-center">Add to Cart</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Empty Wishlist State (Hidden by default) -->
+                    <div id="emptyWishlist" class="hidden text-center py-16 bg-rewear-gray rounded-lg" data-aos="fade-up" data-aos-duration="500">
+                        <svg class="w-16 h-16 mx-auto mb-4 text-gray-400" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <h2 class="text-xl font-semibold mb-2">Your wishlist is empty</h2>
+                        <p class="text-gray-500 mb-6">Save items you love to your wishlist and find them here anytime.</p>
+                        <a href="collection.html" class="inline-block bg-black text-white px-6 py-3 font-medium hover:bg-gray-800 transition-colors rounded-md">Explore Collection</a>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <div class="w-full lg:w-1/4 mt-8 lg:mt-0">
+                    <!-- Wishlist Summary -->
+                    <div class="bg-rewear-gray p-6 rounded-xl mb-6" data-aos="fade-up" data-aos-duration="500" data-aos-delay="200">
+                        <h3 class="font-semibold text-lg mb-4">Wishlist Summary</h3>
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-600">Total Items</span>
+                                <span class="font-medium">3</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-600">Items on Sale</span>
+                                <span class="font-medium">3</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-600">Total Savings</span>
+                                <span class="font-medium text-rewear-sale">Rp. 525.000</span>
+                            </div>
+                            <div class="border-t border-gray-300 pt-3 mt-3">
+                                <div class="flex justify-between items-center">
+                                    <span class="font-medium">Total Value</span>
+                                    <span class="font-bold">Rp. 525.000</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recently Viewed -->
+                    <div class="bg-rewear-gray p-6 rounded-xl mb-6" data-aos="fade-up" data-aos-duration="500" data-aos-delay="300">
+                        <h3 class="font-semibold text-lg mb-4">Recently Viewed</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center space-x-3">
+                                <img src="assets/images/cloth-3.png" alt="Bookmark Crochet" class="w-16 h-16 object-cover rounded-lg">
+                                <div>
+                                    <h4 class="font-medium text-sm">Bookmark Crochet</h4>
+                                    <p class="text-gray-500 text-xs">Rp. 175.000</p>
+                                    <a href="detail.html" class="text-xs text-rewear-sale mt-1 flex items-center">
+                                        <svg class="w-3 h-3 mr-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                        Add to Wishlist
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <img src="assets/images/cloth-4.png" alt="Child Crochet Bucket Hat" class="w-16 h-16 object-cover rounded-lg">
+                                <div>
+                                    <h4 class="font-medium text-sm">Child Crochet Bucket Hat</h4>
+                                    <p class="text-gray-500 text-xs">Rp. 175.000</p>
+                                    <a href="detail.html" class="text-xs text-rewear-sale mt-1 flex items-center">
+                                        <svg class="w-3 h-3 mr-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                        Add to Wishlist
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- You May Also Like -->
+                    <div class="bg-rewear-highlight bg-opacity-30 p-6 rounded-xl" data-aos="fade-up" data-aos-duration="500" data-aos-delay="400">
+                        <h3 class="font-semibold text-lg mb-4">You May Also Like</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center space-x-3">
+                                <img src="assets/images/cloth-6.png" alt="Product 6" class="w-16 h-16 object-cover rounded-lg">
+                                <div>
+                                    <h4 class="font-medium text-sm">Handmade Knitted Scarf</h4>
+                                    <p class="text-gray-500 text-xs">Rp. 150.000</p>
+                                    <a href="detail.html" class="text-xs text-rewear-sale mt-1 flex items-center">
+                                        <svg class="w-3 h-3 mr-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                        Add to Wishlist
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <img src="assets/images/cloth-7.png" alt="Product 7" class="w-16 h-16 object-cover rounded-lg">
+                                <div>
+                                    <h4 class="font-medium text-sm">Eco-friendly Tote Bag</h4>
+                                    <p class="text-gray-500 text-xs">Rp. 125.000</p>
+                                    <a href="detail.html" class="text-xs text-rewear-sale mt-1 flex items-center">
+                                        <svg class="w-3 h-3 mr-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                        Add to Wishlist
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="bg-rewear-footer text-white py-8 mt-auto">
+            <div class="grid grid-cols-2 md:grid-cols-5 px-8 md:px-32 gap-y-8">
+                <!-- Column 1 -->
+                <div class="col-span-1" data-aos="fade-up" data-aos-duration="500" data-aos-delay="400">
+                    <h3 class="text-lg font-semibold mb-4">REWEAR</h3>
+                    <ul class="space-y-2">
+                        <li><a href="location.html" class="hover:text-gray-300 transition-colors">LOCATION</a></li>
+                        <li><a href="about.html" class="hover:text-gray-300 transition-colors">ABOUT US</a></li>
+                        <li class="cursor-pointer hover:text-gray-300 transition-colors" onclick="togglePopup(true)">CONTACT US</li>
+                    </ul>
+                </div>
+                
+                <!-- Column 2 -->
+                <div class="col-span-1" data-aos="fade-up" data-aos-duration="500" data-aos-delay="500">
+                    <h3 class="text-lg font-semibold mb-4">HELP</h3>
+                    <ul class="space-y-2">
+                        <li class="cursor-pointer hover:text-gray-300 transition-colors" onclick="togglePopup(true)">FAQ</li>
+                        <li class="cursor-pointer hover:text-gray-300 transition-colors" onclick="togglePopup(true)">PAYMENT</li>
+                        <li class="cursor-pointer hover:text-gray-300 transition-colors" onclick="togglePopup(true)">PRIVACY AND POLICY</li>
+                    </ul>
+                </div>
+                
+                <!-- Column 3 -->
+                <div class="col-span-1" data-aos="fade-up" data-aos-duration="500" data-aos-delay="600">
+                    <h3 class="text-lg font-semibold mb-4">CUSTOMER</h3>
+                    <ul class="space-y-2">
+                        <li class="cursor-pointer hover:text-gray-300 transition-colors" onclick="togglePopup(true)">VOUCHER</li>
+                        <li class="cursor-pointer hover:text-gray-300 transition-colors" onclick="togglePopup(true)">ORDER TRACK</li>
+                    </ul>
+                </div>
+                
+                <!-- Column 4 -->
+                <div class="col-span-1" data-aos="fade-up" data-aos-duration="500" data-aos-delay="700">
+                    <h3 class="text-lg font-semibold mb-4">PRODUCTS</h3>
+                    <ul class="space-y-2">
+                        <li class="cursor-pointer hover:text-gray-300 transition-colors" onclick="togglePopup(true)">SALE</li>
+                        <li><a href="collection.html" class="hover:text-gray-300 transition-colors">NEW COLLECTIONS</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Column 5 - Social -->
+                <div class="col-span-2 md:col-span-1 flex flex-col items-center md:items-start" data-aos="fade-up" data-aos-duration="500" data-aos-delay="800">
+                    <a href="index.html" class="text-xl font-bold mb-2">REWEAR.CO</a>
+                    <h3 class="text-sm font-semibold mb-2">FOLLOW US</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-8 h-8 rounded-full bg-white flex items-center justify-center">
+                            <i class="fab fa-instagram text-rewear-footer"></i>
+                        </a>
+                        <a href="#" class="w-8 h-8 rounded-full bg-white flex items-center justify-center">
+                            <i class="fab fa-facebook-f text-rewear-footer"></i>
+                        </a>
+                        <a href="#" class="w-8 h-8 rounded-full bg-white flex items-center justify-center">
+                            <i class="fab fa-twitter text-rewear-footer"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div id="confirmationModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white p-6 rounded-xl shadow-lg w-80 text-center">
+            <h2 class="text-xl font-bold mb-4 text-black">Remove from Wishlist?</h2>
+            <p class="mb-6 text-gray-700">Are you sure you want to remove this item from your wishlist?</p>
+            <div class="flex justify-center space-x-4">
+                <button id="cancelRemove" class="px-4 py-2 border border-gray-300 rounded-md text-sm hover:bg-gray-100 transition-colors">Cancel</button>
+                <button id="confirmRemove" class="px-4 py-2 bg-rewear-sale text-white rounded-md text-sm hover:bg-red-600 transition-colors">Remove</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Clear All Confirmation Modal -->
+    <div id="clearAllModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white p-6 rounded-xl shadow-lg w-80 text-center">
+            <h2 class="text-xl font-bold mb-4 text-black">Clear Wishlist?</h2>
+            <p class="mb-6 text-gray-700">Are you sure you want to remove all items from your wishlist?</p>
+            <div class="flex justify-center space-x-4">
+                <button id="cancelClear" class="px-4 py-2 border border-gray-300 rounded-md text-sm hover:bg-gray-100 transition-colors">Cancel</button>
+                <button id="confirmClear" class="px-4 py-2 bg-rewear-sale text-white rounded-md text-sm hover:bg-red-600 transition-colors">Clear All</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+
+        // Navigation functions
+        const hamburger = document.getElementById('hamburger');
+        const cross = document.getElementById('cross');
+        const sidebar = document.getElementById('sidebar');
+        const nav = document.getElementById('nav');
+        
+        hamburger.addEventListener('click', function() {
+            nav.style.pointerEvents = 'all';
+            sidebar.classList.add('translate-x-0');
+            sidebar.classList.remove('-translate-x-full');
+        });
+
+        cross.addEventListener('click', function() {
+            sidebar.classList.remove('translate-x-0');
+            sidebar.classList.add('-translate-x-full');
+            setTimeout(() => {
+                nav.style.pointerEvents = 'none';
+            }, 300);
+        });
+
+        function searching() {
+            const searchBar = document.getElementById('searchBar');
+            searchBar.style.display = searchBar.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        function togglePopup(show) {
+            const popup = document.getElementById('popup');
+            if (popup) {
+                popup.style.display = show ? 'flex' : 'none';
+            }
+        }
+
+        // Wishlist functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const wishlistToggles = document.querySelectorAll('.wishlist-toggle');
+            const confirmationModal = document.getElementById('confirmationModal');
+            const cancelRemove = document.getElementById('cancelRemove');
+            const confirmRemove = document.getElementById('confirmRemove');
+            const clearWishlist = document.getElementById('clearWishlist');
+            const clearAllModal = document.getElementById('clearAllModal');
+            const cancelClear = document.getElementById('cancelClear');
+            const confirmClear = document.getElementById('confirmClear');
+            const wishlistItems = document.getElementById('wishlistItems');
+            const emptyWishlist = document.getElementById('emptyWishlist');
+            
+            let currentItem = null;
+
+            // Handle wishlist toggle clicks
+            wishlistToggles.forEach(toggle => {
+                toggle.addEventListener('click', function() {
+                    currentItem = this.closest('.wishlist-item');
+                    confirmationModal.classList.remove('hidden');
+                });
+            });
+
+            // Handle cancel remove
+            cancelRemove.addEventListener('click', function() {
+                confirmationModal.classList.add('hidden');
+                currentItem = null;
+            });
+
+            // Handle confirm remove
+            confirmRemove.addEventListener('click', function() {
+                if (currentItem) {
+                    currentItem.classList.add('opacity-0');
+                    setTimeout(() => {
+                        currentItem.remove();
+                        updateWishlistCount();
+                        checkEmptyWishlist();
+                    }, 300);
+                }
+                confirmationModal.classList.add('hidden');
+            });
+
+            // Handle clear all wishlist
+            clearWishlist.addEventListener('click', function() {
+                clearAllModal.classList.remove('hidden');
+            });
+
+            // Handle cancel clear all
+            cancelClear.addEventListener('click', function() {
+                clearAllModal.classList.add('hidden');
+            });
+
+            // Handle confirm clear all
+            confirmClear.addEventListener('click', function() {
+                const items = document.querySelectorAll('.wishlist-item');
+                items.forEach(item => {
+                    item.classList.add('opacity-0');
+                });
+                
+                setTimeout(() => {
+                    wishlistItems.innerHTML = '';
+                    updateWishlistCount();
+                    checkEmptyWishlist();
+                }, 300);
+                
+                clearAllModal.classList.add('hidden');
+            });
+
+            // Update wishlist count
+            function updateWishlistCount() {
+                const count = document.querySelectorAll('.wishlist-item').length;
+                
+                // Update tab count
+                const tabButton = document.querySelector('.border-b-2.border-black');
+                if (tabButton) {
+                    tabButton.textContent = `All Items (${count})`;
+                }
+                
+                // Update summary count
+                const totalItems = document.querySelector('.space-y-3 .flex:first-child .font-medium');
+                if (totalItems) {
+                    totalItems.textContent = count;
+                }
+                
+                // Update badge count
+                const badge = document.querySelector('.absolute.-top-2.-right-2');
+                if (badge) {
+                    badge.textContent = count;
+                    if (count === 0) {
+                        badge.classList.add('hidden');
+                    }
+                }
+            }
+
+            // Check if wishlist is empty
+            function checkEmptyWishlist() {
+                const count = document.querySelectorAll('.wishlist-item').length;
+                if (count === 0) {
+                    emptyWishlist.classList.remove('hidden');
+                    wishlistItems.classList.add('hidden');
+                    document.querySelector('.border-b.border-gray-200').classList.add('hidden');
+                    document.querySelector('.flex.justify-between.items-center.mb-6').classList.add('hidden');
+                } else {
+                    emptyWishlist.classList.add('hidden');
+                    wishlistItems.classList.remove('hidden');
+                    document.querySelector('.border-b.border-gray-200').classList.remove('hidden');
+                    document.querySelector('.flex.justify-between.items-center.mb-6').classList.remove('hidden');
+                }
+            }
+        });
+    </script>
+</body>
+</html>

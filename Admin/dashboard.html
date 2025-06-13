@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Rewear.co</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body class="bg-gray-50">
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <div class="hidden md:flex md:flex-shrink-0">
+            <div class="flex flex-col w-64 bg-white border-r border-gray-200">
+                <div class="flex flex-col flex-grow pt-5 pb-4 overflow-y-auto">
+                    <div class="flex items-center justify-center flex-shrink-0 px-4 mb-8">
+                        <div class="w-10 h-10 rounded-md bg-purple-600 flex items-center justify-center mr-3">
+                            <i class="fas fa-recycle text-white text-xl"></i>
+                        </div>
+                        <span class="font-bold text-xl text-purple-600">Rewear.co</span>
+                    </div>
+
+                    <div class="flex-grow flex flex-col">
+                        <nav class="flex-1 px-2 space-y-1">
+                            <a href="dashboard.html"
+                                class="group flex items-center px-4 py-3 text-sm font-medium text-purple-600 bg-purple-50 rounded-xl">
+                                <i class="fas fa-th-large mr-3 text-purple-600"></i>
+                                Dasbor
+                            </a>
+                            <a href="admin-artikel.html"
+                                class="group flex items-center px-4 py-3 text-sm font-medium text-gray-700 hover:bg-purple-50 hover:text-purple-600 rounded-xl transition duration-150">
+                                <i class="fas fa-newspaper mr-3 text-gray-400 group-hover:text-purple-600"></i>
+                                Kelola Artikel
+                            </a>
+                            <a href="admin-produk.html"
+                                class="group flex items-center px-4 py-3 text-sm font-medium text-gray-700 hover:bg-purple-50 hover:text-purple-600 rounded-xl transition duration-150">
+                                <i class="fas fa-tshirt mr-3 text-gray-400 group-hover:text-purple-600"></i>
+                                Kelola Produk
+                            </a>
+                            <a href="admin-pengguna.html"
+                                class="group flex items-center px-4 py-3 text-sm font-medium text-gray-700 hover:bg-purple-50 hover:text-purple-600 rounded-xl transition duration-150">
+                                <i class="fas fa-users mr-3 text-gray-400 group-hover:text-purple-600"></i>
+                                Kelola Pengguna
+                            </a>
+                            <a href="admin-transaksi.html"
+                                class="group flex items-center px-4 py-3 text-sm font-medium text-gray-700 hover:bg-purple-50 hover:text-purple-600 rounded-xl transition duration-150">
+                                <i class="fas fa-credit-card mr-3 text-gray-400 group-hover:text-purple-600"></i>
+                                Kelola Transaksi
+                            </a>
+                        </nav>
+                    </div>
+
+                    <div class="px-2 mt-6 mb-4">
+                        <div class="bg-purple-50 rounded-xl p-4">
+                            <div class="flex items-center">
+                                <img src="../assets/images/photo.jpeg" alt="Admin"
+                                    class="w-10 h-10 rounded-full object-cover">
+                                <div class="ml-3">
+                                    <p class="text-sm font-medium text-gray-800">Admin User</p>
+                                    <p class="text-xs text-gray-500">admin@rewear.co</p>
+                                </div>
+                            </div>
+                            <div class="mt-4 flex justify-between">
+                                <button class="text-sm text-purple-600 hover:text-purple-800 flex items-center">
+                                    <i class="fas fa-cog mr-1"></i> Pengaturan
+                                </button>
+                                <button onclick="window.location.href='login.html'"
+                                    class="text-sm text-purple-600 hover:text-purple-800 flex items-center">
+                                    <i class="fas fa-sign-out-alt mr-1"></i> Logout
+                                </button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile sidebar & overlay -->
+        <div class="md:hidden fixed inset-0 z-40 flex">
+            <div id="sidebarOverlay" class="fixed inset-0 bg-gray-600 bg-opacity-75 transition-opacity hidden"></div>
+
+            <div id="mobileSidebar"
+                class="fixed inset-y-0 left-0 flex flex-col w-full max-w-xs bg-white transform -translate-x-full transition duration-300 ease-in-out hidden">
+                <div class="flex items-center justify-between px-4 py-5 border-b border-gray-200">
+                    <div class="flex items-center">
+                        <div class="w-8 h-8 rounded-md bg-purple-600 flex items-center justify-center mr-2">
+                            <i class="fas fa-recycle text-white text-lg"></i>
+                        </div>
+                        <span class="font-bold text-lg text-purple-600">Rewear.co</span>
+                    </div>
+                    <button id="closeSidebar" class="text-gray-500 hover:text-gray-700 focus:outline-none">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+
+                <div class="overflow-y-auto">
+                    <nav class="px-4 pt-4 space-y-1">
+                        <a href="dashboard.html"
+                            class="group flex items-center px-3 py-3 text-sm font-medium text-purple-600 bg-purple-50 rounded-xl">
+                            <i class="fas fa-th-large mr-3 text-purple-600"></i>
+                            Dasbor
+                        </a>
+                        <a href="#"
+                            class="group flex items-center px-3 py-3 text-sm font-medium text-gray-700 hover:bg-purple-50 hover:text-purple-600 rounded-xl">
+                            <i class="fas fa-newspaper mr-3 text-gray-400 group-hover:text-purple-600"></i>
+                            Kelola Artikel
+                        </a>
+                        <a href="#"
+                            class="group flex items-center px-3 py-3 text-sm font-medium text-gray-700 hover:bg-purple-50 hover:text-purple-600 rounded-xl">
+                            <i class="fas fa-tshirt mr-3 text-gray-400 group-hover:text-purple-600"></i>
+                            Kelola Produk
+                        </a>
+                        <a href="#"
+                            class="group flex items-center px-3 py-3 text-sm font-medium text-gray-700 hover:bg-purple-50 hover:text-purple-600 rounded-xl">
+                            <i class="fas fa-users mr-3 text-gray-400 group-hover:text-purple-600"></i>
+                            Kelola Pengguna
+                        </a>
+                        <a href="#"
+                            class="group flex items-center px-3 py-3 text-sm font-medium text-gray-700 hover:bg-purple-50 hover:text-purple-600 rounded-xl">
+                            <i class="fas fa-credit-card mr-3 text-gray-400 group-hover:text-purple-600"></i>
+                            Kelola Transaksi
+                        </a>
+                    </nav>
+                </div>
+
+                <div class="px-4 mt-auto mb-6">
+                    <div class="bg-purple-50 rounded-xl p-4">
+                        <div class="flex items-center">
+                            <img src="../assets/images/photo.jpeg" alt="Admin"
+                                class="w-10 h-10 rounded-full object-cover">
+                            <div class="ml-3">
+                                <p class="text-sm font-medium text-gray-800">Admin User</p>
+                                <p class="text-xs text-gray-500">admin@rewear.co</p>
+                            </div>
+                        </div>
+                        <div class="mt-4 flex justify-between">
+                            <button class="text-sm text-purple-600 hover:text-purple-800 flex items-center">
+                                <i class="fas fa-cog mr-1"></i> Pengaturan
+                            </button>
+                            <button onclick="window.location.href='login.html'"
+                                    class="text-sm text-purple-600 hover:text-purple-800 flex items-center">
+                                    <i class="fas fa-sign-out-alt mr-1"></i> Logout
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main content -->
+        <div class="flex flex-col flex-1 w-0 overflow-hidden">
+            <!-- Top navbar -->
+            <div class="relative z-10 flex-shrink-0 flex h-16 bg-white border-b border-gray-200">
+                <button id="openSidebar" class="md:hidden px-4 text-gray-500 focus:outline-none focus:bg-gray-100">
+                    <i class="fas fa-bars"></i>
+                </button>
+
+                <div class="flex-1 px-4 flex justify-between">
+                    <div class="flex-1 flex items-center">
+                        <h1 class="text-xl font-semibold text-gray-800">Dasbor</h1>
+                    </div>
+                    <div class="ml-4 flex items-center md:ml-6">
+                        <button
+                            class="p-2 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:text-gray-500">
+                            <i class="fas fa-bell"></i>
+                        </button>
+                        <div class="ml-3 relative">
+                            <button
+                                class="max-w-xs flex items-center text-sm rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:text-gray-500">
+                                <i class="fas fa-question-circle text-xl"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <main class="flex-1 relative overflow-y-auto focus:outline-none">
+                <div class="py-6">
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+                        <!-- Welcome section -->
+                        <div class="bg-purple-600 rounded-3xl p-6 sm:p-10 mb-6 text-white">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <h2 class="text-2xl sm:text-3xl font-bold mb-2">Selamat datang kembali, Admin!</h2>
+                                    <p class="text-purple-100 mb-4">Berikut yang terjadi dengan toko Anda hari ini.</p>
+                                    <div class="flex flex-wrap gap-3 mt-6">
+                                        <button
+                                            class="bg-purple-500 hover:bg-purple-400 px-4 py-2 rounded-xl font-medium transition duration-150 flex items-center">
+                                            <i class="fas fa-chart-line mr-2"></i> Lihat Laporan
+                                        </button>
+                                    </div>
+                                </div>
+                                <!-- <div class="hidden md:flex justify-end">
+                                    <div class="relative">
+                                       
+                                        <div class="absolute top-0 right-0 w-16 h-16 bg-purple-500 rounded-full opacity-60"></div>
+                                        <div class="absolute bottom-0 left-0 w-20 h-20 bg-purple-500 rounded-full opacity-60"></div>
+                                        
+                                       
+                                        <div class="absolute top-4 left-12 w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-lg">
+                                            <i class="fas fa-tshirt text-purple-600 text-xl"></i>
+                                        </div>
+                                        <div class="absolute bottom-4 right-10 w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-lg">
+                                            <i class="fas fa-users text-purple-600 text-xl"></i>
+                                        </div>
+                                        <div class="absolute top-1/2 right-1/3 w-14 h-14 bg-white rounded-xl flex items-center justify-center shadow-lg transform -translate-y-1/2">
+                                            <i class="fas fa-chart-pie text-purple-600 text-xl"></i>
+                                        </div>
+                                    </div>
+                                </div> -->
+                            </div>
+                        </div>
+
+                        <!-- Stats cards -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-8">
+                            <div class="bg-white rounded-2xl shadow p-6 flex items-center">
+                                <div class="rounded-full bg-purple-100 p-3 mr-4">
+                                    <i class="fas fa-tshirt text-purple-600 text-xl"></i>
+                                </div>
+                                <div>
+                                    <p class="text-gray-500 text-sm">Total Produk</p>
+                                    <h3 class="text-2xl font-bold text-gray-800">284</h3>
+                                    <p class="text-green-500 text-xs font-medium flex items-center mt-1">
+                                        <i class="fas fa-arrow-up mr-1"></i> 12% peningkatan
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="bg-white rounded-2xl shadow p-6 flex items-center">
+                                <div class="rounded-full bg-blue-100 p-3 mr-4">
+                                    <i class="fas fa-users text-blue-600 text-xl"></i>
+                                </div>
+                                <div>
+                                    <p class="text-gray-500 text-sm">Total Pengguna</p>
+                                    <h3 class="text-2xl font-bold text-gray-800">1,249</h3>
+                                    <p class="text-green-500 text-xs font-medium flex items-center mt-1">
+                                        <i class="fas fa-arrow-up mr-1"></i> 18% peningkatan
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="bg-white rounded-2xl shadow p-6 flex items-center">
+                                <div class="rounded-full bg-amber-100 p-3 mr-4">
+                                    <i class="fas fa-newspaper text-amber-600 text-xl"></i>
+                                </div>
+                                <div>
+                                    <p class="text-gray-500 text-sm">Total Artikel</p>
+                                    <h3 class="text-2xl font-bold text-gray-800">56</h3>
+                                    <p class="text-green-500 text-xs font-medium flex items-center mt-1">
+                                        <i class="fas fa-arrow-up mr-1"></i> 8% peningkatan
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="bg-white rounded-2xl shadow p-6 flex items-center">
+                                <div class="rounded-full bg-green-100 p-3 mr-4">
+                                    <i class="fas fa-credit-card text-green-600 text-xl"></i>
+                                </div>
+                                <div>
+                                    <p class="text-gray-500 text-sm">Total Transaksi</p>
+                                    <h3 class="text-2xl font-bold text-gray-800">$38,450</h3>
+                                    <p class="text-green-500 text-xs font-medium flex items-center mt-1">
+                                        <i class="fas fa-arrow-up mr-1"></i> 24% peningkatan
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Charts -->
+                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+                            <div class="bg-white rounded-2xl shadow p-6 lg:col-span-2">
+                                <div class="flex flex-wrap justify-between items-center mb-6">
+                                    <h2 class="text-lg font-semibold text-gray-800">Ikhtisar Penjualan</h2>
+                                    <div class="flex space-x-2 mt-2 sm:mt-0">
+                                        <button
+                                            class="px-3 py-1 text-sm bg-purple-100 text-purple-600 rounded-lg">Bulanan</button>
+                                        <button
+                                            class="px-3 py-1 text-sm text-gray-500 hover:bg-gray-100 rounded-lg">Mingguan</button>
+                                        <button
+                                            class="px-3 py-1 text-sm text-gray-500 hover:bg-gray-100 rounded-lg">Harian</button>
+                                    </div>
+                                </div>
+                                <div class="h-64">
+                                    <canvas id="salesChart"></canvas>
+                                </div>
+                            </div>
+
+                            <div class="bg-white rounded-2xl shadow p-6">
+                                <div class="flex justify-between items-center mb-6">
+                                    <h2 class="text-lg font-semibold text-gray-800">Kategori Produk</h2>
+                                    <button class="text-purple-600 hover:text-purple-800 text-sm font-medium">
+                                        <i class="fas fa-ellipsis-h"></i>
+                                    </button>
+                                </div>
+                                <div class="h-64 flex items-center justify-center">
+                                    <canvas id="categoriesChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Recent Activity -->
+                        <div class="bg-white rounded-2xl shadow overflow-hidden mb-8">
+                            <div class="px-6 py-5 border-b border-gray-200 flex justify-between items-center">
+                                <h2 class="text-lg font-semibold text-gray-800">Aktivitas Terbaru</h2>
+                                <button class="text-purple-600 hover:text-purple-800 text-sm font-medium">
+                                    Lihat Semua
+                                </button>
+                            </div>
+                            <div class="divide-y divide-gray-200">
+                                <div class="px-6 py-4 flex items-center">
+                                    <div class="flex-shrink-0 mr-4">
+                                        <div
+                                            class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center">
+                                            <i class="fas fa-shopping-bag text-purple-600"></i>
+                                        </div>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <p class="text-sm font-medium text-gray-900 truncate">
+                                            Pesanan baru oleh <span class="text-purple-600">John Doe</span>
+                                        </p>
+                                        <p class="text-sm text-gray-500 truncate">
+                                            Pesanan #4829 - Kaos Ramah Lingkungan (2 item)
+                                        </p>
+                                    </div>
+                                    <div class="flex-shrink-0 ml-4">
+                                        <span class="text-xs text-gray-500">5 menit yang lalu</span>
+                                    </div>
+                                </div>
+
+                                <div class="px-6 py-4 flex items-center">
+                                    <div class="flex-shrink-0 mr-4">
+                                        <div
+                                            class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
+                                            <i class="fas fa-user-plus text-green-600"></i>
+                                        </div>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <p class="text-sm font-medium text-gray-900 truncate">
+                                            Pengguna baru terdaftar
+                                        </p>
+                                        <p class="text-sm text-gray-500 truncate">
+                                            Emma Wilson bergabung sebagai pelanggan
+                                        </p>
+                                    </div>
+                                    <div class="flex-shrink-0 ml-4">
+                                        <span class="text-xs text-gray-500">2 jam yang lalu</span>
+                                    </div>
+                                </div>
+
+                                <div class="px-6 py-4 flex items-center">
+                                    <div class="flex-shrink-0 mr-4">
+                                        <div
+                                            class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
+                                            <i class="fas fa-pen text-blue-600"></i>
+                                        </div>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <p class="text-sm font-medium text-gray-900 truncate">
+                                            Artikel baru dipublikasikan
+                                        </p>
+                                        <p class="text-sm text-gray-500 truncate">
+                                            "5 Cara Membuat Lemari Pakaian Anda Berkelanjutan" oleh Admin
+                                        </p>
+                                    </div>
+                                    <div class="flex-shrink-0 ml-4">
+                                        <span class="text-xs text-gray-500">Kemarin</span>
+                                    </div>
+                                </div>
+
+                                <div class="px-6 py-4 flex items-center">
+                                    <div class="flex-shrink-0 mr-4">
+                                        <div
+                                            class="w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center">
+                                            <i class="fas fa-tag text-amber-600"></i>
+                                        </div>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <p class="text-sm font-medium text-gray-900 truncate">
+                                            Produk baru ditambahkan
+                                        </p>
+                                        <p class="text-sm text-gray-500 truncate">
+                                            "Kemeja Kasual Katun Organik" dalam Koleksi Musim Panas
+                                        </p>
+                                    </div>
+                                    <div class="flex-shrink-0 ml-4">
+                                        <span class="text-xs text-gray-500">2 hari yang lalu</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-gray-50 px-6 py-3">
+                                <a href="#" class="text-sm font-medium text-purple-600 hover:text-purple-800">Lihat
+                                    semua aktivitas</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        // Mobile sidebar toggle
+        document.getElementById('openSidebar').addEventListener('click', function () {
+            document.getElementById('mobileSidebar').classList.remove('hidden', '-translate-x-full');
+            document.getElementById('mobileSidebar').classList.add('translate-x-0');
+            document.getElementById('sidebarOverlay').classList.remove('hidden');
+        });
+
+        document.getElementById('closeSidebar').addEventListener('click', function () {
+            document.getElementById('mobileSidebar').classList.add('-translate-x-full');
+            document.getElementById('sidebarOverlay').classList.add('hidden');
+        });
+
+        document.getElementById('sidebarOverlay').addEventListener('click', function () {
+            document.getElementById('mobileSidebar').classList.add('-translate-x-full');
+            document.getElementById('sidebarOverlay').classList.add('hidden');
+        });
+
+        // Sales Chart
+        const salesCtx = document.getElementById('salesChart').getContext('2d');
+        const salesChart = new Chart(salesCtx, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                datasets: [{
+                    label: 'Sales',
+                    data: [2500, 3800, 3200, 4300, 3800, 5200, 5800, 6300, 6800, 7200, 7800, 8500],
+                    backgroundColor: 'rgba(124, 58, 237, 0.1)',
+                    borderColor: 'rgba(124, 58, 237, 1)',
+                    borderWidth: 2,
+                    tension: 0.4,
+                    pointBackgroundColor: '#fff',
+                    pointBorderColor: 'rgba(124, 58, 237, 1)',
+                    pointRadius: 4,
+                    pointHoverRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            color: 'rgba(0, 0, 0, 0.05)'
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        }
+                    }
+                }
+            }
+        });
+
+        // Categories Chart
+        const categoriesCtx = document.getElementById('categoriesChart').getContext('2d');
+        const categoriesChart = new Chart(categoriesCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Kaos', 'Jeans', 'Gaun', 'Aksesoris', 'Pakaian Luar'],
+                datasets: [{
+                    data: [35, 20, 25, 10, 10],
+                    backgroundColor: [
+                        'rgba(124, 58, 237, 0.8)',
+                        'rgba(79, 70, 229, 0.8)',
+                        'rgba(59, 130, 246, 0.8)',
+                        'rgba(16, 185, 129, 0.8)',
+                        'rgba(245, 158, 11, 0.8)'
+                    ],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            boxWidth: 12,
+                            padding: 15
+                        }
+                    }
+                },
+                cutout: '70%'
+            }
+        });
+    </script>
+</body>
+
+</html>

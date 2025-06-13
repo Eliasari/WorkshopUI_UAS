@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | Rewear.co Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body class="bg-gray-50">
+    <div class="min-h-screen flex">
+        <!-- Left side - Illustration -->
+        <div class="hidden lg:block relative w-0 flex-1 bg-purple-600 overflow-hidden">
+            <div class="absolute inset-0 flex items-center justify-center">
+                <!-- Decorative elements -->
+                <div class="absolute top-20 right-20 w-32 h-32 bg-white rounded-full opacity-10"></div>
+                <div class="absolute bottom-20 left-20 w-40 h-40 bg-white rounded-full opacity-10"></div>
+                <div class="absolute top-1/3 left-1/4 w-24 h-24 bg-white rounded-full opacity-10"></div>
+
+                <!-- Main illustration -->
+                <div class="relative z-10 max-w-lg">
+                    <div class="relative">
+                        <!-- Document -->
+                        <div class="w-64 h-80 bg-white rounded-lg shadow-2xl transform -rotate-6 mx-auto relative">
+                            <div class="absolute inset-4 border-2 border-dashed border-purple-300 rounded"></div>
+
+                            <!-- Document content -->
+                            <div class="absolute inset-8 flex flex-col">
+                                <div class="w-full h-4 bg-purple-200 rounded mb-3"></div>
+                                <div class="w-3/4 h-4 bg-purple-200 rounded mb-6"></div>
+
+                                <div class="w-full h-3 bg-gray-200 rounded mb-2"></div>
+                                <div class="w-full h-3 bg-gray-200 rounded mb-2"></div>
+                                <div class="w-2/3 h-3 bg-gray-200 rounded mb-4"></div>
+
+                                <div class="w-full h-3 bg-gray-200 rounded mb-2"></div>
+                                <div class="w-full h-3 bg-gray-200 rounded mb-2"></div>
+                                <div class="w-3/4 h-3 bg-gray-200 rounded mb-4"></div>
+
+                                <div class="w-1/2 h-8 bg-purple-500 rounded mt-auto"></div>
+                            </div>
+                        </div>
+
+                        <!-- Person -->
+                        <div class="absolute -bottom-10 -right-10">
+                            <div class="w-24 h-32 relative">
+                                <!-- Body -->
+                                <div
+                                    class="absolute bottom-0 right-0 w-16 h-20 bg-blue-500 rounded-t-lg transform -rotate-12">
+                                </div>
+
+                                <!-- Head -->
+                                <div class="absolute top-0 right-8 w-12 h-12 bg-amber-800 rounded-full"></div>
+
+                                <!-- Arm -->
+                                <div
+                                    class="absolute top-10 right-16 w-16 h-4 bg-blue-500 rounded-full transform -rotate-45">
+                                </div>
+
+                                <!-- Legs -->
+                                <div
+                                    class="absolute bottom-0 right-4 w-6 h-12 bg-gray-200 rounded-t-lg transform -rotate-12">
+                                </div>
+                                <div
+                                    class="absolute bottom-0 right-10 w-6 h-10 bg-gray-200 rounded-t-lg transform rotate-12">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Checkmark bubble -->
+                        <div
+                            class="absolute top-10 right-10 w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-lg">
+                            <i class="fas fa-check text-purple-600 text-2xl"></i>
+                        </div>
+
+                        <!-- Pen -->
+                        <div class="absolute bottom-20 left-10 w-16 h-4 bg-yellow-400 rounded-full transform rotate-45">
+                            <div class="absolute -right-1 -top-1 w-4 h-4 bg-red-500 rounded-full"></div>
+                            <div
+                                class="absolute -left-2 -bottom-2 w-6 h-2 bg-gray-700 rounded-full transform -rotate-45">
+                            </div>
+                        </div>
+
+                        <!-- Clouds -->
+                        <div class="absolute top-0 right-0 w-20 h-10 bg-white rounded-full opacity-70"></div>
+                        <div class="absolute top-5 right-10 w-16 h-8 bg-white rounded-full opacity-70"></div>
+                        <div class="absolute bottom-0 right-20 w-24 h-12 bg-white rounded-full opacity-70"></div>
+                        <div class="absolute bottom-10 left-20 w-20 h-10 bg-white rounded-full opacity-70"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right side - Form -->
+        <div class="flex-1 flex flex-col justify-center py-12 px-4 sm:px-6 lg:px-20 xl:px-24">
+            <div class="mx-auto w-full max-w-sm lg:w-96">
+                <div>
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 rounded-md bg-purple-600 flex items-center justify-center mr-3">
+                            <i class="fas fa-recycle text-white text-xl"></i>
+                        </div>
+                        <h2 class="text-3xl font-bold text-purple-600">Rewear.co</h2>
+                    </div>
+                    <h2 class="mt-8 text-3xl font-extrabold text-gray-900">Create Account</h2>
+                    <p class="mt-2 text-sm text-gray-600">
+                        Join us and start managing your sustainable fashion store
+                    </p>
+                </div>
+
+                <div class="mt-8">
+                    <div class="mt-6">
+                        <form action="#" method="POST" class="space-y-5">
+                            <div class="grid grid-cols-1 gap-y-5 gap-x-4 sm:grid-cols-2">
+                                <div>
+                                    <label for="first-name" class="block text-sm font-medium text-gray-700">First
+                                        name</label>
+                                    <div class="mt-1 relative rounded-md shadow-sm">
+                                        <input type="text" name="first-name" id="first-name"
+                                            class="focus:ring-purple-500 focus:border-purple-500 block w-full py-3 px-4 border border-gray-300 rounded-md"
+                                            placeholder="First name" required>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label for="last-name" class="block text-sm font-medium text-gray-700">Last
+                                        name</label>
+                                    <div class="mt-1 relative rounded-md shadow-sm">
+                                        <input type="text" name="last-name" id="last-name"
+                                            class="focus:ring-purple-500 focus:border-purple-500 block w-full py-3 px-4 border border-gray-300 rounded-md"
+                                            placeholder="Last name" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-700">Email address</label>
+                                <div class="mt-1 relative rounded-md shadow-sm">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <i class="fas fa-envelope text-gray-400"></i>
+                                    </div>
+                                    <input type="email" name="email" id="email"
+                                        class="focus:ring-purple-500 focus:border-purple-500 block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-md"
+                                        placeholder="you@example.com" required>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label for="role" class="block text-sm font-medium text-gray-700">Admin Role</label>
+                                <div class="mt-1 relative rounded-md shadow-sm">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <i class="fas fa-user-shield text-gray-400"></i>
+                                    </div>
+                                    <select name="role" id="role"
+                                        class="focus:ring-purple-500 focus:border-purple-500 block w-full pl-10 pr-10 py-3 border border-gray-300 rounded-md"
+                                        required>
+                                        <option value="">Select a role</option>
+                                        <option value="admin">Admin</option>
+                                        <option value="editor">Editor</option>
+                                        <option value="viewer">Viewer</option>
+                                    </select>
+                                    <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                                        <i class="fas fa-chevron-down text-gray-400"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+                                <div class="mt-1 relative rounded-md shadow-sm">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <i class="fas fa-lock text-gray-400"></i>
+                                    </div>
+                                    <input type="password" name="password" id="password"
+                                        class="focus:ring-purple-500 focus:border-purple-500 block w-full pl-10 pr-10 py-3 border border-gray-300 rounded-md"
+                                        placeholder="Create a password" required>
+                                    <div class="absolute inset-y-0 right-0 pr-3 flex items-center">
+                                        <button type="button" id="togglePassword"
+                                            class="text-gray-400 hover:text-gray-500 focus:outline-none">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="mt-1">
+                                    <div class="flex items-center mt-1">
+                                        <div class="w-1/4 h-1 bg-gray-200 rounded-full mr-1" id="strength-1"></div>
+                                        <div class="w-1/4 h-1 bg-gray-200 rounded-full mr-1" id="strength-2"></div>
+                                        <div class="w-1/4 h-1 bg-gray-200 rounded-full mr-1" id="strength-3"></div>
+                                        <div class="w-1/4 h-1 bg-gray-200 rounded-full" id="strength-4"></div>
+                                    </div>
+                                    <p class="text-xs text-gray-500 mt-1" id="password-strength-text">Password strength
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label for="confirm-password" class="block text-sm font-medium text-gray-700">Confirm
+                                    password</label>
+                                <div class="mt-1 relative rounded-md shadow-sm">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <i class="fas fa-lock text-gray-400"></i>
+                                    </div>
+                                    <input type="password" name="confirm-password" id="confirm-password"
+                                        class="focus:ring-purple-500 focus:border-purple-500 block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-md"
+                                        placeholder="Confirm your password">
+                                </div>
+                            </div>
+
+                            <!-- Tambahan akhir form -->
+                            <div class="flex items-center">
+                                <input id="terms" name="terms" type="checkbox" required
+                                    class="h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300 rounded">
+                                <label for="terms" class="ml-2 block text-sm text-gray-900">
+                                    I agree to the <a href="#" class="text-purple-600 hover:underline">terms and
+                                        conditions</a>
+                                </label>
+                            </div>
+
+                            <div>
+                                <button type="submit"
+                                    class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500">
+                                    Register
+                                </button>
+                            </div>
+
+
+                            <p class="mt-6 text-center text-sm text-gray-600">
+                                Already have an account?
+                                <a href="login.html" class="text-purple-600 hover:underline">Sign in here</a>
+                            </p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Script -->
+        <script>
+            const togglePassword = document.getElementById('togglePassword');
+            const passwordInput = document.getElementById('password');
+            const passwordStrengthText = document.getElementById('password-strength-text');
+
+            togglePassword.addEventListener('click', () => {
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+                togglePassword.innerHTML = `<i class="fas ${type === 'password' ? 'fa-eye' : 'fa-eye-slash'}"></i>`;
+            });
+
+            passwordInput.addEventListener('input', () => {
+                const val = passwordInput.value;
+                let strength = 0;
+                if (val.length >= 8) strength++;
+                if (/[A-Z]/.test(val)) strength++;
+                if (/[0-9]/.test(val)) strength++;
+                if (/[^A-Za-z0-9]/.test(val)) strength++;
+
+                // Reset all bars
+                for (let i = 1; i <= 4; i++) {
+                    document.getElementById(`strength-${i}`).classList.remove('bg-purple-500');
+                }
+
+                for (let i = 1; i <= strength; i++) {
+                    document.getElementById(`strength-${i}`).classList.add('bg-purple-500');
+                }
+
+                const levels = ["Weak", "Fair", "Good", "Strong"];
+                passwordStrengthText.textContent = strength > 0 ? `Password strength: ${levels[strength - 1]}` : "Password strength";
+            });
+
+            // Optional: Simulate redirect after submit
+            const form = document.querySelector("form");
+            form.addEventListener("submit", function (e) {
+                e.preventDefault();
+                // Validasi sederhana
+                const termsChecked = document.getElementById("terms").checked;
+                const pass = passwordInput.value;
+                const confirmPass = document.getElementById("confirm-password").value;
+
+                if (!termsChecked) {
+                    alert("Please agree to the terms and conditions.");
+                    return;
+                }
+
+                if (pass !== confirmPass) {
+                    alert("Passwords do not match.");
+                    return;
+                }
+
+                // Simulasi redirect
+                window.location.href = "dashboard.html";
+            });
+
+            // Toggle password visibility
+            document.getElementById('togglePassword').addEventListener('click', function () {
+                const passwordInput = document.getElementById('password');
+                const icon = this.querySelector('i');
+                if (passwordInput.type === 'password') {
+                    passwordInput.type = 'text';
+                    icon.classList.remove('fa-eye');
+                    icon.classList.add('fa-eye-slash');
+                } else {
+                    passwordInput.type = 'password';
+                    icon.classList.remove('fa-eye-slash');
+                    icon.classList.add('fa-eye');
+                }
+            });
+
+            // Simple password match check
+            document.querySelector('form').addEventListener('submit', function (e) {
+                const pass = document.getElementById('password').value;
+                const confirm = document.getElementById('confirm-password').value;
+
+                if (pass !== confirm) {
+                    e.preventDefault();
+                    alert("Password and confirm password do not match.");
+                }
+            });
+        </script>
+</body>
+
+</html>

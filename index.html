@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rewear.co - Tailwind Version</title>
+    <!-- Tailwind CSS v3 CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts - Montserrat -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <!-- Custom Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'montserrat': ['Montserrat', 'sans-serif'],
+                    },
+                    colors: {
+                        'rewear': {
+                            'bg': '#ffffff',
+                            'text': '#000000',
+                            'footer': '#1e1f20',
+                            'highlight': '#eccdb4',
+                            'sale': '#fea1a1',
+                            'gray': '#f6f5f2',
+                            'card': '#f0edd4',
+                        }
+                    },
+                    animation: {
+                        'heartBeat': 'heartBeat 0.3s ease-out',
+                    },
+                    keyframes: {
+                        heartBeat: {
+                            '0%': { transform: 'scale(1)' },
+                            '50%': { transform: 'scale(1.2)' },
+                            '100%': { transform: 'scale(1)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom styles that are difficult to achieve with Tailwind alone */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        
+        .fade-in.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Heart icon for wishlist */
+        .heart {
+            width: 20px;
+            height: 20px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .heart::before,
+        .heart::after {
+            content: "";
+            position: absolute;
+            width: 10px;
+            height: 16px;
+            border-radius: 10px 10px 0 0;
+            background: #fff;
+            transition: all 0.3s ease;
+        }
+        
+        .heart::before {
+            left: 10px;
+            transform: rotate(-45deg);
+            transform-origin: 0 100%;
+        }
+        
+        .heart::after {
+            left: 0;
+            transform: rotate(45deg);
+            transform-origin: 100% 100%;
+        }
+        
+        .wishlist-btn:hover .heart::before,
+        .wishlist-btn:hover .heart::after,
+        .wishlist-btn.active .heart::before,
+        .wishlist-btn.active .heart::after {
+            background: #fea1a1;
+        }
+        
+        .wishlist-btn.active .heart {
+            animation: heartBeat 0.3s ease-out;
+        }
+        
+        @keyframes heartBeat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+        
+        /* Fix for iOS Safari 100vh issue */
+        @supports (-webkit-touch-callout: none) {
+            .h-screen {
+                height: -webkit-fill-available;
+            }
+        }
+        
+        /* Hide scrollbar but allow scrolling */
+        .hide-scrollbar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;  /* Chrome, Safari, Opera */
+        }
+
+        .snap-x {
+            scroll-snap-type: x mandatory;
+        }
+        .snap-start {
+            scroll-snap-align: start;
+        }
+
+        .dropdown-container {
+            position: relative;
+        }
+        .dropdown-menu {
+            position: absolute;
+            z-index: 50;
+        }
+    </style>
+</head>
+<body class="font-montserrat overflow-x-hidden bg-rewear-bg text-rewear-text">
+    <!-- Header -->
+    <header id="main-header" class="fixed w-full z-10 transition-all duration-300 bg-transparent">
+        <div class="container mx-auto px-4 py-5 flex justify-between items-center">
+            <div class="text-xl md:text-2xl font-bold text-white">Rewear.co</div>
+            
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:block">
+                <ul class="flex space-x-6">
+                    <li><a href="#about" class="text-white hover:text-gray-300 transition-colors">About us</a></li>
+                    <li><a href="#redesign" class="text-white hover:text-gray-300 transition-colors">Redesign</a></li>
+                    <li><a href="#product" class="text-white hover:text-gray-300 transition-colors">Product</a></li>
+                    <li><a href="#tailor" class="text-white hover:text-gray-300 transition-colors">Tailor</a></li>
+                    <li><a href="#education" class="text-white hover:text-gray-300 transition-colors">Education</a></li>
+                    <li><a href="#reviews" class="text-white hover:text-gray-300 transition-colors">Review</a></li>
+                    <li><a href="#contact" class="text-white hover:text-gray-300 transition-colors">Contact</a></li>
+                </ul>
+            </nav>
+            
+            <!-- Desktop Search -->
+            <div class="hidden md:block">
+                <input type="text" placeholder="Search" class="bg-transparent border border-white text-white px-3 py-2 rounded-md focus:outline-none">
+            </div>
+            
+            <!-- Mobile Menu Button -->
+            <button id="menu-toggle" class="md:hidden text-white text-2xl" aria-label="Toggle menu">☰</button>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="fixed inset-0 bg-black bg-opacity-90 z-20 transform -translate-y-full transition-transform duration-300 ease-in-out">
+        <div class="container mx-auto px-6 py-20">
+            <ul class="space-y-6">
+                <li><a href="#about" class="block text-white text-xl py-2 border-b border-gray-800">About us</a></li>
+                <li><a href="#redesign" class="block text-white text-xl py-2 border-b border-gray-800">Redesign</a></li>
+                <li><a href="#product" class="block text-white text-xl py-2 border-b border-gray-800">Product</a></li>
+                <li><a href="#tailor" class="block text-white text-xl py-2 border-b border-gray-800">Tailor</a></li>
+                <li><a href="#education" class="block text-white text-xl py-2 border-b border-gray-800">Education</a></li>
+                <li><a href="#reviews" class="block text-white text-xl py-2 border-b border-gray-800">Review</a></li>
+                <li><a href="#contact" class="block text-white text-xl py-2 border-b border-gray-800">Contact</a></li>
+            </ul>
+            <div class="mt-8">
+                <input type="text" placeholder="Search" class="w-full bg-transparent border border-white text-white px-4 py-3 rounded-md focus:outline-none">
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="relative h-screen fade-in">
+        <div class="absolute inset-0 bg-black bg-opacity-50 z-10"></div>
+        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('./assets/image/dashboard3.png')"></div>
+        <div class="relative h-full flex items-center z-20">
+            <div class="container mx-auto px-6">
+                <div class="max-w-xl text-white">
+                    <h1 class="text-4xl md:text-6xl font-bold leading-tight mb-6">GIVE YOUR CLOTHES A<br> SECOND LIFE</h1>
+                    <p class="text-base md:text-lg mb-8">
+                        Don't let old clothes go to waste. Transform and remake unused clothing into something new and stylish. 
+                        Discover the best tailor recommendations to bring your favorite outfits back to life while contributing 
+                        to a more sustainable fashion future.
+                    </p>
+                    <a href="#about" class="inline-block bg-white text-rewear-text font-bold px-6 py-3 rounded hover:bg-transparent hover:text-white hover:border-white border-2 border-transparent transition-all duration-300">Explore</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="relative py-24 md:py-32 bg-rewear-bg fade-in">
+        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-[8rem] md:text-[12rem] font-bold text-black text-opacity-5 uppercase whitespace-nowrap scale-x-150">REWEAR</div>
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="max-w-2xl mx-auto text-center">
+                <h2 class="text-3xl md:text-4xl font-bold text-rewear-text mb-8 relative z-20">REWEAR.CO</h2>
+                <p class="text-base md:text-lg text-rewear-text mb-8 relative z-20">
+                    Revamp your wardrobe by giving old clothes a fresh new look. Transform and remake unused outfits into stylish pieces while supporting a more sustainable fashion movement. 
+                    Discover top tailor recommendations to bring your fashion ideas to life.
+                </p>
+                <a href="./about.html" class="inline-block bg-rewear-text text-white font-bold px-6 py-3 rounded hover:bg-gray-800 transition-colors duration-300 relative z-20">Learn More →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Redesign Banner -->
+    <section id="redesign" class="relative py-20 md:py-32 fade-in">
+        <div class="absolute inset-0 bg-black bg-opacity-40"></div>
+        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('./assets/image/dashboard4.jpg')"></div>
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="max-w-4xl mx-auto text-center text-white">
+                <h2 class="text-4xl md:text-5xl font-bold uppercase mb-4">Redesign Your Clothes</h2>
+                <p class="text-xl mb-8">Give your old clothes a fresh, stylish look this season!</p>
+                <a href="./redesign.html" class="inline-block bg-rewear-text text-white font-bold px-6 py-3 rounded hover:bg-gray-800 transition-colors duration-300">Redesign →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Section -->
+<section id="product" class="py-20 bg-rewear-bg fade-in">
+    <div class="container mx-auto px-4">
+        <!-- Section Title -->
+        <div class="relative h-36 mb-12 flex justify-center items-center">
+            <div class="absolute text-6xl md:text-7xl font-bold text-rewear-text text-opacity-10">BEST SELLER</div>
+            <div class="relative text-3xl md:text-4xl font-bold text-rewear-text">BEST SELLER</div>
+        </div>
+        
+        <!-- Product Slider - Centered with improved scrolling -->
+        <div class="relative max-w-6xl mx-auto">
+            <!-- Slider Navigation Buttons -->
+            <!-- <button id="prev-btn" class="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-white text-rewear-text w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center shadow-md hover:bg-gray-100 transition-colors cursor-pointer z-20">
+                <i class="fas fa-chevron-left"></i>
+            </button> -->
+            
+            <div class="overflow-x-auto hide-scrollbar px-12">
+                <div id="product-slider" class="flex gap-5 py-4 snap-x snap-mandatory">
+                    <!-- Product 1 -->
+                    <div class="flex-none w-60 bg-white relative fade-in snap-start">
+                        <div class="relative overflow-hidden group h-64">
+                            <img src="./assets/image/product1.jpg" alt="Product 1" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                            <button class="wishlist-btn absolute top-4 right-4 w-9 h-9 rounded-full bg-white bg-opacity-30 backdrop-blur-sm flex items-center justify-center cursor-pointer transition-all hover:bg-opacity-50 hover:scale-110" role="button" tabindex="0">
+                                <div class="heart"></div>
+                            </button>
+                        </div>
+                        <div class="p-4 flex flex-col h-[152px]">
+                            <h3 class="font-semibold text-rewear-text mb-2">Elegant Patchwork Skirt</h3>
+                            <div class="mt-auto mb-4">
+                                <span class="font-bold text-rewear-text">Rp. 175.000</span>
+                                <span class="ml-2 text-gray-500 line-through">Rp. 350.000</span>
+                            </div>
+                            <a href="./collection.html" class="block w-full bg-rewear-text text-white text-center py-2 rounded hover:bg-gray-800 transition-colors">Shop Now →</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Product 2 -->
+                    <div class="flex-none w-60 bg-white relative fade-in snap-start">
+                        <div class="relative overflow-hidden group h-64">
+                            <img src="./assets/image/product2.jpg" alt="Product 2" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                            <button class="wishlist-btn absolute top-4 right-4 w-9 h-9 rounded-full bg-white bg-opacity-30 backdrop-blur-sm flex items-center justify-center cursor-pointer transition-all hover:bg-opacity-50 hover:scale-110" role="button" tabindex="0">
+                                <div class="heart"></div>
+                            </button>
+                        </div>
+                        <div class="p-4 flex flex-col h-[152px]">
+                            <h3 class="font-semibold text-rewear-text mb-2">Colorful Patchwork</h3>
+                            <div class="mt-auto mb-4">
+                                <span class="font-bold text-rewear-text">Rp. 175.000</span>
+                                <span class="ml-2 text-gray-500 line-through">Rp. 350.000</span>
+                            </div>
+                            <a href="./collection.html" class="block w-full bg-rewear-text text-white text-center py-2 rounded hover:bg-gray-800 transition-colors">Shop Now →</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Product 3 -->
+                    <div class="flex-none w-60 bg-white relative fade-in snap-start">
+                        <div class="relative overflow-hidden group h-64">
+                            <img src="./assets/image/product3.jpg" alt="Product 3" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                            <button class="wishlist-btn absolute top-4 right-4 w-9 h-9 rounded-full bg-white bg-opacity-30 backdrop-blur-sm flex items-center justify-center cursor-pointer transition-all hover:bg-opacity-50 hover:scale-110" role="button" tabindex="0">
+                                <div class="heart"></div>
+                            </button>
+                        </div>
+                        <div class="p-4 flex flex-col h-[152px]">
+                            <h3 class="font-semibold text-rewear-text mb-2">Soft Green Plush Bag</h3>
+                            <div class="mt-auto mb-4">
+                                <span class="font-bold text-rewear-text">Rp. 175.000</span>
+                                <span class="ml-2 text-gray-500 line-through">Rp. 350.000</span>
+                            </div>
+                            <a href="./collection.html" class="block w-full bg-rewear-text text-white text-center py-2 rounded hover:bg-gray-800 transition-colors">Shop Now →</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Product 4 -->
+                    <div class="flex-none w-60 bg-white relative fade-in snap-start">
+                        <div class="relative overflow-hidden group h-64">
+                            <img src="./assets/image/product4.jpg" alt="Product 4" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                            <button class="wishlist-btn absolute top-4 right-4 w-9 h-9 rounded-full bg-white bg-opacity-30 backdrop-blur-sm flex items-center justify-center cursor-pointer transition-all hover:bg-opacity-50 hover:scale-110" role="button" tabindex="0">
+                                <div class="heart"></div>
+                            </button>
+                        </div>
+                        <div class="p-4 flex flex-col h-[152px]">
+                            <h3 class="font-semibold text-rewear-text mb-2">Distressed Denim</h3>
+                            <div class="mt-auto mb-4">
+                                <span class="font-bold text-rewear-text">Rp. 175.000</span>
+                                <span class="ml-2 text-gray-500 line-through">Rp. 350.000</span>
+                            </div>
+                            <a href="./collection.html" class="block w-full bg-rewear-text text-white text-center py-2 rounded hover:bg-gray-800 transition-colors">Shop Now →</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Product 5 -->
+                    <div class="flex-none w-60 bg-white relative fade-in snap-start">
+                        <div class="relative overflow-hidden group h-64">
+                            <img src="./assets/image/product5.jpg" alt="Product 5" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                            <button class="wishlist-btn absolute top-4 right-4 w-9 h-9 rounded-full bg-white bg-opacity-30 backdrop-blur-sm flex items-center justify-center cursor-pointer transition-all hover:bg-opacity-50 hover:scale-110" role="button" tabindex="0">
+                                <div class="heart"></div>
+                            </button>
+                        </div>
+                        <div class="p-4 flex flex-col h-[152px]">
+                            <h3 class="font-semibold text-rewear-text mb-2">Jacket Denim</h3>
+                            <div class="mt-auto mb-4">
+                                <span class="font-bold text-rewear-text">Rp. 175.000</span>
+                                <span class="ml-2 text-gray-500 line-through">Rp. 350.000</span>
+                            </div>
+                            <a href="./collection.html" class="block w-full bg-rewear-text text-white text-center py-2 rounded hover:bg-gray-800 transition-colors">Shop Now →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- <button id="next-btn" class="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-white text-rewear-text w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center shadow-md hover:bg-gray-100 transition-colors cursor-pointer z-20">
+                <i class="fas fa-chevron-right"></i>
+            </button> -->
+        </div>
+    </div>
+</section>
+
+    <!-- Tailor Section -->
+    <section id="tailor" class="py-20 bg-rewear-bg fade-in">
+        <div class="container mx-auto px-4">
+            <!-- Section Title -->
+            <div class="relative h-36 mb-12 flex justify-center items-center">
+                <div class="absolute text-6xl md:text-7xl font-bold text-rewear-text text-opacity-10">BEST TAILOR</div>
+                <div class="relative text-3xl md:text-4xl font-bold text-rewear-text">BEST OFFER TAILOR</div>
+            </div>
+            
+            <!-- Tailor Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- Large Tailor Box -->
+                <div class="relative h-64 bg-cover bg-center fade-in" style="background-image: url('./assets/image/tailor6.jpg')">
+                    <div class="absolute inset-0 flex flex-col justify-end p-6">
+                        <h3 class="text-2xl font-bold text-rewear-text mb-4">WHERE DREAMS MEET CULTURE</h3>
+                        <a href="./tailor.html" class="inline-block bg-rewear-text text-white font-bold px-6 py-3 w-max hover:bg-gray-800 transition-colors">Details →</a>
+                    </div>
+                </div>
+                
+                <!-- Medium Tailor Box -->
+                <div class="relative h-64 bg-cover bg-center fade-in" style="background-image: url('./assets/image/tailor5.jpg')">
+                    <div class="absolute inset-0 flex flex-col justify-end p-6">
+                        <h3 class="text-2xl font-bold text-rewear-text mb-4">WARM HOODIE FOR WINTER</h3>
+                        <a href="./tailor.html" class="inline-block bg-rewear-text text-white font-bold px-6 py-3 w-max hover:bg-gray-800 transition-colors">Details →</a>
+                    </div>
+                </div>
+                
+                <!-- Small Tailor Box -->
+                <div class="relative h-64 bg-cover bg-center fade-in" style="background-image: url('./assets/image/tailor7.jpg')">
+                    <div class="absolute inset-0 flex flex-col justify-end p-6">
+                        <h3 class="text-2xl font-bold text-rewear-text mb-4">ENCHANTING STYLES FOR EVERY WOMAN</h3>
+                        <a href="./tailor.html" class="inline-block bg-rewear-text text-white font-bold px-6 py-3 w-max hover:bg-gray-800 transition-colors">Details →</a>
+                    </div>
+                </div>
+                
+                <!-- Discount Box -->
+                <div class="bg-gray-200 h-64 flex flex-col items-center justify-center fade-in">
+                    <h3 class="text-3xl font-bold text-rewear-text mb-4"><span class="text-4xl">50%</span> Off</h3>
+                    <a href="./tailor.html" class="inline-block bg-rewear-text text-white font-bold px-6 py-3 hover:bg-gray-800 transition-colors">Details →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="py-20 bg-cover bg-center fade-in" style="background-image: url('./assets/image/bg1.jpg')">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row gap-10">
+                <!-- Left Column - Header -->
+                <div class="md:w-1/3 fade-in">
+                    <h2 class="text-3xl md:text-4xl font-bold text-rewear-sale mb-6">Tailor's Guide</h2>
+                    <p class="text-rewear-text mb-6">
+                        Transform your old clothes into trendy new outfits with our expert tips and guides.
+                        Discover creative remake ideas, DIY tutorials, and eco-friendly fashion solutions.
+                    </p>
+                    <a href="articles.html" class="bg-rewear-text text-white font-bold px-6 py-3 hover:bg-gray-800 transition-colors">Explore More</a>
+                </div>
+                
+                <!-- Right Column - Cards -->
+                <div class="md:w-2/3 overflow-x-auto hide-scrollbar">
+                    <div class="flex space-x-5 pb-4">
+                        <!-- Card 1 -->
+                        <div class="flex-none w-72 bg-white shadow-md fade-in">
+                            <img src="./assets/image/edukasi1.jpg" alt="Denim Upcycling" class="w-full h-48 object-cover">
+                            <div class="p-4">
+                                <h3 class="font-bold text-lg text-rewear-text mb-2">DIY: Upgrade Your Old Jeans</h3>
+                                <p class="text-rewear-text text-sm mb-4">Turn your worn-out jeans into stylish shorts, skirts, or even tote bags. Learn the step-by-step guide here.</p>
+                                <a href="https://www.cosmopolitan.com/style-beauty/fashion/a34778427/diy-jeans-makeover-ideas/" class="font-bold text-rewear-text hover:underline">Read More →</a>
+                            </div>
+                        </div>
+                        
+                        <!-- Card 2 -->
+                        <div class="flex-none w-72 bg-white shadow-md fade-in">
+                            <img src="./assets/image/edukasi2.jpg" alt="T-Shirt Transformation" class="w-full h-48 object-cover">
+                            <div class="p-4">
+                                <h3 class="font-bold text-lg text-rewear-text mb-2">T-Shirt Remake: From Basic to Trendy</h3>
+                                <p class="text-rewear-text text-sm mb-4">Give your old t-shirts a second life! Learn how to crop, dye, or re-style them into fresh fashion pieces.</p>
+                                <a href="https://www.cosmopolitan.com/style-beauty/fashion/how-to/a46619/customize-your-team-t-shirt-for-your-next-tailgate/" class="font-bold text-rewear-text hover:underline">Read More →</a>
+                            </div>
+                        </div>
+                        
+                        <!-- Card 3 -->
+                        <div class="flex-none w-72 bg-white shadow-md fade-in">
+                            <img src="./assets/image/edukasi3.jpg" alt="Vintage Revival" class="w-full h-48 object-cover">
+                            <div class="p-4">
+                                <h3 class="font-bold text-lg text-rewear-text mb-2">Revamp Vintage Dresses</h3>
+                                <p class="text-rewear-text text-sm mb-4">Breathe new life into vintage dresses with simple sewing techniques and modern touches.</p>
+                                <a href="https://www.cosmopolitan.com/style-beauty/fashion/a38278933/how-to-dress-vintage/" class="font-bold text-rewear-text hover:underline">Read More →</a>
+                            </div>
+                        </div>
+                        
+                        <!-- Card 4 -->
+                        <div class="flex-none w-72 bg-white shadow-md fade-in">
+                            <img src="./assets/image/edukasi4.webp" alt="Patchwork Fashion" class="w-full h-48 object-cover">
+                            <div class="p-4">
+                                <h3 class="font-bold text-lg text-rewear-text mb-2">Patchwork Creativity</h3>
+                                <p class="text-rewear-text text-sm mb-4">Use fabric scraps to create unique patchwork clothing, combining colors and textures for a bold look.</p>
+                                <a href="https://www.cosmopolitan.com/lifestyle/a35045/be-more-creative-every-day/" class="font-bold text-rewear-text hover:underline">Read More →</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section id="reviews" class="py-20 bg-rewear-bg fade-in">
+        <div class="container mx-auto px-4">
+            <!-- Section Title -->
+            <div class="relative h-36 mb-12 flex justify-center items-center">
+                <div class="absolute text-6xl md:text-7xl font-bold text-rewear-text text-opacity-10 uppercase">PEOPLE THOUGHTS</div>
+                <div class="relative text-3xl md:text-4xl font-bold text-rewear-text uppercase">PEOPLE THOUGHTS</div>
+            </div>
+            
+            <!-- Reviews Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Review 1 -->
+                <div class="border border-gray-200 p-6 transition-all duration-300 hover:-translate-y-5 hover:shadow-lg fade-in">
+                    <div class="flex items-center mb-6">
+                        <img src="./assets/image/people4.jpg" alt="Sarah profile" class="w-16 h-16 rounded-full object-cover">
+                        <div class="ml-4">
+                            <h4 class="font-bold text-rewear-text">Sarah</h4>
+                            <p class="text-gray-600">Jakarta, Indonesia</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 mb-4">
+                        "I love how Rewear.co helps me transform my old clothes into trendy pieces. Their tailors are skilled and understand exactly what I want. Now my wardrobe is more sustainable and stylish!"
+                    </p>
+                    <div class="text-yellow-400">★★★★★</div>
+                </div>
+                
+                <!-- Review 2 -->
+                <div class="border border-gray-200 p-6 transition-all duration-300 hover:-translate-y-5 hover:shadow-lg fade-in">
+                    <div class="flex items-center mb-6">
+                        <img src="./assets/image/people2.jpg" alt="Michael profile" class="w-16 h-16 rounded-full object-cover">
+                        <div class="ml-4">
+                            <h4 class="font-bold text-rewear-text">Michael</h4>
+                            <p class="text-gray-600">Bandung, Indonesia</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 mb-4">
+                        "The transformation service is amazing! They turned my old jeans into a fantastic denim jacket. It's like having a new piece without contributing to fast fashion waste."
+                    </p>
+                    <div class="text-yellow-400">★★★★★</div>
+                </div>
+                
+                <!-- Review 3 -->
+                <div class="border border-gray-200 p-6 transition-all duration-300 hover:-translate-y-5 hover:shadow-lg fade-in">
+                    <div class="flex items-center mb-6">
+                        <img src="./assets/image/people3.jpg" alt="Lisa profile" class="w-16 h-16 rounded-full object-cover">
+                        <div class="ml-4">
+                            <h4 class="font-bold text-rewear-text">Lisa</h4>
+                            <p class="text-gray-600">Surabaya, Indonesia</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 mb-4">
+                        "Great way to give old clothes new life! Their tailors are creative and professional. I've saved money while helping the environment. Highly recommend their upcycling services!"
+                    </p>
+                    <div class="text-yellow-400">★★★★★</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="bg-rewear-footer text-white py-12 fade-in">
+        <div class="container mx-auto px-4">
+            <div class="mb-8">
+                <h3 class="text-2xl font-bold mb-4">Rewear.co</h3>
+                <p class="max-w-xl mb-8">
+                    Empowering design capabilities of tomorrow startups & enterprises. Nice To Meet You Studio was established as a
+                    fully remote and distributed company based in Indonesia, with the goal of globally democratising great design for all.
+                </p>
+                
+                <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-8">
+                    <!-- Menu Links -->
+                    <div class="flex flex-col md:flex-row md:items-center space-y-4 md:space-y-0 md:space-x-4 mb-8 md:mb-0">
+                        <a href="#" class="hover:text-gray-300 transition-colors">COMPANY</a>
+                        <span class="hidden md:inline">|</span>
+                        <a href="#" class="hover:text-gray-300 transition-colors">NEWS & INFORMATION</a>
+                        <span class="hidden md:inline">|</span>
+                        <a href="#" class="hover:text-gray-300 transition-colors">ABOUT</a>
+                        <span class="hidden md:inline">|</span>
+                        <a href="#" class="hover:text-gray-300 transition-colors">CONTACT</a>
+                    </div>
+                    
+                    <!-- Social Links -->
+                    <div class="flex items-center space-x-6">
+                        <p class="font-semibold">FOLLOW US</p>
+                        <div class="flex space-x-4">
+                            <a href="#" class="w-10 h-10 rounded-full bg-white flex items-center justify-center">
+                                <i class="fab fa-instagram text-rewear-footer"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 rounded-full bg-white flex items-center justify-center">
+                                <i class="fab fa-linkedin-in text-rewear-footer"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <hr class="border-gray-700 mb-6">
+            
+            <div class="flex flex-col md:flex-row md:justify-between md:items-center">
+                <div class="flex items-center mb-4 md:mb-0">
+                    <i class="far fa-copyright mr-2"></i>
+                    <p>Rewear.co</p>
+                </div>
+                <div class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-6">
+                    <a href="#" class="hover:text-gray-300 transition-colors">Terms and Condition</a>
+                    <a href="#" class="hover:text-gray-300 transition-colors">Disclaimer</a>
+                    <a href="#" class="hover:text-gray-300 transition-colors">Privacy Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const header = document.getElementById('main-header');
+        
+        menuToggle.addEventListener('click', function(e) {
+            e.stopPropagation();
+            mobileMenu.classList.toggle('translate-y-0');
+            mobileMenu.classList.toggle('-translate-y-full');
+        });
+        
+        // Close mobile menu when clicking on a link
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                mobileMenu.classList.remove('translate-y-0');
+                mobileMenu.classList.add('-translate-y-full');
+            });
+        });
+        
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!mobileMenu.contains(event.target) && event.target !== menuToggle) {
+                mobileMenu.classList.remove('translate-y-0');
+                mobileMenu.classList.add('-translate-y-full');
+            }
+        });
+        
+        // Change header background on scroll - Fixed version
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 10) {
+                header.classList.remove('bg-transparent');
+                header.classList.add('bg-black');
+                header.classList.add('bg-opacity-90');
+            } else {
+                header.classList.add('bg-transparent');
+                header.classList.remove('bg-black');
+                header.classList.remove('bg-opacity-90');
+            }
+        });
+
+        // Trigger the scroll event on page load to set initial state
+        window.addEventListener('load', function() {
+            // Force the scroll event to fire
+            window.dispatchEvent(new Event('scroll'));
+        });
+        
+        // Simple product slider functions
+        document.addEventListener('DOMContentLoaded', function() {
+            const slider = document.getElementById('product-slider');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            
+            if (slider && prevBtn && nextBtn) {
+                prevBtn.addEventListener('click', function() {
+                    slider.scrollBy({
+                        left: -280,
+                        behavior: 'smooth'
+                    });
+                });
+                
+                nextBtn.addEventListener('click', function() {
+                    slider.scrollBy({
+                        left: 280,
+                        behavior: 'smooth'
+                    });
+                });
+            }
+        });
+        
+        // Enhanced scroll animation that works when scrolling up or down
+        document.addEventListener('DOMContentLoaded', function() {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    // Add 'show' class when element enters viewport
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('show');
+                    } else {
+                        // Only remove 'show' class when element is completely out of viewport
+                        // This prevents flickering on mobile
+                        if (entry.intersectionRatio <= 0.05) {
+                            entry.target.classList.remove('show');
+                        }
+                    }
+                });
+            }, {
+                threshold: [0.05, 0.1, 0.2],  // Multiple thresholds for smoother transitions
+                rootMargin: '0px 0px -50px 0px'  // Slightly offset to trigger earlier
+            });
+            
+            fadeElements.forEach(element => {
+                observer.observe(element);
+            });
+            
+            // Fix for iOS vh issue
+            function setVhProperty() {
+                let vh = window.innerHeight * 0.01;
+                document.documentElement.style.setProperty('--vh', `${vh}px`);
+            }
+            
+            setVhProperty();
+            window.addEventListener('resize', setVhProperty);
+        });
+        
+        // Wishlist functionality
+        document.addEventListener("DOMContentLoaded", () => {
+            const wishlistButtons = document.querySelectorAll(".wishlist-btn");
+            const wishlist = new Set(JSON.parse(localStorage.getItem("wishlist") || "[]"));
+            
+            // Update initial states
+            wishlistButtons.forEach((button, index) => {
+                if (wishlist.has(index)) {
+                    button.classList.add("active");
+                }
+                
+                button.addEventListener("click", function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    // Toggle active state
+                    this.classList.toggle("active");
+                    
+                    // Reset animation
+                    const heart = this.querySelector(".heart");
+                    heart.style.animation = "none";
+                    heart.offsetHeight; // Trigger reflow
+                    heart.style.animation = null;
+                    
+                    // Update wishlist
+                    if (this.classList.contains("active")) {
+                        wishlist.add(index);
+                        heart.style.animation = "heartBeat 0.3s ease-out";
+                    } else {
+                        wishlist.delete(index);
+                    }
+                    
+                    localStorage.setItem("wishlist", JSON.stringify([...wishlist]));
+                });
+                
+                // Add keyboard support for accessibility
+                button.addEventListener("keypress", function(e) {
+                    if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        this.click();
+                    }
+                });
+            });
+        });
+
+        // Dropdown functionality
+        function toggleDropdown(event, dropdownId) {
+            event.stopPropagation();
+            const dropdown = document.getElementById(dropdownId);
+            dropdown.classList.toggle('hidden');
+            
+            // Close all other dropdowns
+            const allDropdowns = document.querySelectorAll('.dropdown-menu');
+            allDropdowns.forEach(menu => {
+                if (menu.id !== dropdownId) {
+                    menu.classList.add('hidden');
+                }
+            });
+        }
+
+        // Close dropdowns when clicking elsewhere
+        document.addEventListener('click', function(event) {
+            const dropdowns = document.querySelectorAll('.dropdown-menu');
+            dropdowns.forEach(dropdown => {
+                if (!dropdown.contains(event.target)) {
+                    dropdown.classList.add('hidden');
+                }
+            });
+        });
+
+        // Prevent dropdown from closing when clicking inside it
+        document.querySelectorAll('.dropdown-menu').forEach(menu => {
+            menu.addEventListener('click', function(event) {
+                event.stopPropagation();
+            });
+        });
+    </script>
+</body>
+</html>

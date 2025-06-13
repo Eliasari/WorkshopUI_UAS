@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collection Item Detail - Rewear.co</title>
+    <!-- Tailwind CSS v3 CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts - Montserrat -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <!-- AOS Animation Library -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <!-- Custom Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'montserrat': ['Montserrat', 'sans-serif'],
+                    },
+                    colors: {
+                        'rewear': {
+                            'bg': '#ffffff',
+                            'text': '#000000',
+                            'footer': '#1e1f20',
+                            'highlight': '#eccdb4',
+                            'sale': '#e53e3e',
+                            'gray': '#f6f5f2',
+                            'card': '#f0edd4',
+                        }
+                    },
+                    animation: {
+                        'heartBeat': 'heartBeat 0.3s ease-out',
+                    },
+                    keyframes: {
+                        heartBeat: {
+                            '0%': { transform: 'scale(1)' },
+                            '50%': { transform: 'scale(1.2)' },
+                            '100%': { transform: 'scale(1)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom styles that are difficult to achieve with Tailwind alone */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Fix for iOS Safari 100vh issue */
+        @supports (-webkit-touch-callout: none) {
+            .h-screen {
+                height: -webkit-fill-available;
+            }
+        }
+        
+        /* Hide scrollbar but allow scrolling */
+        .hide-scrollbar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;  /* Chrome, Safari, Opera */
+        }
+        
+        /* Tab transition */
+        .tab-content {
+            display: none;
+            transition: opacity 0.3s ease;
+        }
+        
+        .tab-content.active {
+            display: block;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="font-montserrat bg-white text-rewear-text relative">
+    <div class="min-h-screen flex flex-col">
+        <!-- Mobile Navigation Sidebar -->
+        <div id="nav" class="fixed inset-0 z-30 pointer-events-none">
+            <div id="sidebar" class="bg-black w-full h-full p-8 transform -translate-x-full transition-transform duration-300 ease-out">
+                <button id="cross" class="mt-10 text-white">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18 6L6 18" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M6 6L18 18" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+                <a href="index.html" class="block text-center text-white text-xl font-bold mt-4">Rewear.co</a>
+                <ul class="mt-8 space-y-6">
+                    <li><a href="collection.html" class="block text-white text-lg font-semibold">Collection</a></li>
+                    <li><a href="product.html" class="block text-white text-lg font-semibold">Product</a></li>
+                    <li><a href="redesign.html" class="block text-white text-lg font-semibold">Redesign</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Navigation -->
+        <nav class="flex justify-between items-center px-8 py-8 md:py-6 md:px-16">
+            <!-- Desktop Menu -->
+            <div class="hidden md:block">
+                <ul class="flex space-x-6">
+                    <li data-aos="fade-right" data-aos-duration="500" data-aos-delay="200">
+                        <a href="collection.html" class="text-rewear-text hover:opacity-70 transition-opacity">Collection</a>
+                    </li>
+                    <li data-aos="fade-right" data-aos-duration="500" data-aos-delay="300">
+                        <a href="product.html" class="text-rewear-text hover:opacity-70 transition-opacity">Product</a>
+                    </li>
+                    <li data-aos="fade-right" data-aos-duration="500" data-aos-delay="400">
+                        <a href="redesign.html" class="text-rewear-text hover:opacity-70 transition-opacity">Redesign</a>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Logo and Mobile Menu Button -->
+            <div class="flex items-center">
+                <button id="hamburger" class="md:hidden mr-4" data-aos="fade-right" data-aos-duration="500" data-aos-delay="300">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M3 12H21" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M3 6H21" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M3 18H21" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+                <a href="index.html" class="text-xl md:text-2xl font-bold" data-aos="fade-up" data-aos-duration="500" data-aos-delay="200">Rewear.co</a>
+            </div>
+            
+            <!-- Right Actions -->
+            <div class="flex items-center space-x-4 md:space-x-6">
+                <!-- Desktop Search -->
+                <div class="hidden md:flex items-center border border-rewear-text px-4 py-2" data-aos="fade-left" data-aos-duration="500" data-aos-delay="400">
+                    <svg width="16" height="16" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M16.031 14.617L20.314 18.899L18.899 20.314L14.617 16.031C13.0237 17.3082 11.042 18.0029 9 18C4.032 18 0 13.968 0 9C0 4.032 4.032 0 9 0C13.968 0 18 4.032 18 9C18.0029 11.042 17.3082 13.0237 16.031 14.617ZM14.025 13.875C15.2938 12.5697 16.0025 10.8204 16 9C16 5.133 12.867 2 9 2C5.133 2 2 5.133 2 9C2 12.867 5.133 16 9 16C10.8204 16.0025 12.5697 15.2938 13.875 14.025L14.025 13.875Z" fill="#000"/>
+                    </svg>
+                    <input type="text" placeholder="Search" class="bg-transparent ml-2 outline-none w-40">
+                </div>
+                
+                <!-- Mobile Search Button -->
+                <button class="md:hidden" data-aos="fade-left" data-aos-duration="500" data-aos-delay="350" onclick="searching()">
+                    <svg width="20" height="20" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M16.031 14.617L20.314 18.899L18.899 20.314L14.617 16.031C13.0237 17.3082 11.042 18.0029 9 18C4.032 18 0 13.968 0 9C0 4.032 4.032 0 9 0C13.968 0 18 4.032 18 9C18.0029 11.042 17.3082 13.0237 16.031 14.617ZM14.025 13.875C15.2938 12.5697 16.0025 10.8204 16 9C16 5.133 12.867 2 9 2C5.133 2 2 5.133 2 9C2 12.867 5.133 16 9 16C10.8204 16.0025 12.5697 15.2938 13.875 14.025L14.025 13.875Z" fill="#000"/>
+                    </svg>
+                </button>
+                
+                <!-- Bag Icon -->
+                <a href="bag.html" data-aos="fade-left" data-aos-duration="500" data-aos-delay="350">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6 2L3 6V20C3 20.5304 3.21071 21.0391 3.58579 21.4142C3.96086 21.7893 4.46957 22 5 22H19C19.5304 22 20.0391 21.7893 20.4142 21.4142C20.7893 21.0391 21 20.5304 21 20V6L18 2H6Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M3 6H21" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M16 10C16 11.0609 15.5786 12.0783 14.8284 12.8284C14.0783 13.5786 13.0609 14 12 14C10.9391 14 9.92172 13.5786 9.17157 12.8284C8.42143 12.0783 8 11.0609 8 10" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
+                
+                <!-- Wishlist Icon -->
+                <a href="wishlist.html" data-aos="fade-left" data-aos-duration="500" data-aos-delay="300">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="black"/>
+                    </svg>
+                </a>
+                
+                <!-- Profile Icon -->
+                <a href="login.html" data-aos="fade-left" data-aos-duration="500" data-aos-delay="300">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M12 11C14.2091 11 16 9.20914 16 7C16 4.79086 14.2091 3 12 3C9.79086 3 8 4.79086 8 7C8 9.20914 9.79086 11 12 11Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
+            </div>
+        </nav>
+        
+        <!-- Mobile Search Bar -->
+        <div class="px-8 mb-6 md:hidden">
+            <div id="searchBar" class="hidden items-center border border-rewear-text h-12 px-4">
+                <svg width="20" height="20" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M16.031 14.617L20.314 18.899L18.899 20.314L14.617 16.031C13.0237 17.3082 11.042 18.0029 9 18C4.032 18 0 13.968 0 9C0 4.032 4.032 0 9 0C13.968 0 18 4.032 18 9C18.0029 11.042 17.3082 13.0237 16.031 14.617ZM14.025 13.875C15.2938 12.5697 16.0025 10.8204 16 9C16 5.133 12.867 2 9 2C5.133 2 2 5.133 2 9C2 12.867 5.133 16 9 16C10.8204 16.0025 12.5697 15.2938 13.875 14.025L14.025 13.875Z" fill="#000"/>
+                </svg>
+                <input type="text" placeholder="Search" class="bg-transparent ml-2 outline-none w-full">
+            </div>
+        </div>
+
+        <!-- Breadcrumb -->
+        <div class="px-8 md:px-16 py-4">
+            <ul class="flex items-center space-x-2 text-sm">
+                <li data-aos="fade-right" data-aos-duration="500" data-aos-delay="200">
+                    <a href="index.html" class="hover:underline">Home</a>
+                </li>
+                <li data-aos="fade-right" data-aos-duration="500" data-aos-delay="200">/</li>
+                <li data-aos="fade-right" data-aos-duration="500" data-aos-delay="300">
+                    <a href="collection.html" class="hover:underline">Collection</a>
+                </li>
+                <li data-aos="fade-right" data-aos-duration="500" data-aos-delay="300">/</li>
+                <li data-aos="fade-right" data-aos-duration="500" data-aos-delay="400" class="font-medium">Elegant Patchwork Skirt</li>
+            </ul>
+        </div>
+
+        <!-- Product Detail Content -->
+        <div class="px-8 md:px-16 lg:px-32 mb-12">
+            <div class="flex flex-col md:flex-row md:gap-12">
+                <!-- Product Gallery -->
+                <div class="w-full md:w-1/2" data-aos="fade-up" data-aos-duration="500" data-aos-delay="200">
+                    <div class="mb-4">
+                        <img id="mainImage" src="assets/image/product6.png" alt="Elegant Patchwork Skirt" class="w-full h-auto object-cover">
+                    </div>
+                    <div class="flex space-x-2 overflow-x-auto hide-scrollbar pb-2">
+                        <img src="assets/image/product6.png" alt="Elegant Patchwork Skirt - Front" 
+                             class="w-20 h-20 md:w-24 md:h-24 object-cover cursor-pointer border-2 border-black" 
+                             onclick="changeImage('assets/image/product6.png', this)">
+                        <img src="assets/image/product7.png" alt="Elegant Patchwork Skirt - Side" 
+                             class="w-20 h-20 md:w-24 md:h-24 object-cover cursor-pointer border-2 border-transparent" 
+                             onclick="changeImage('assets/image/product7.png', this)">
+                        <img src="assets/image/product8.png" alt="Elegant Patchwork Skirt - Back" 
+                             class="w-20 h-20 md:w-24 md:h-24 object-cover cursor-pointer border-2 border-transparent" 
+                             onclick="changeImage('assets/image/product8.png', this)">
+                        <img src="assets/image/product9.png" alt="Elegant Patchwork Skirt - Detail" 
+                             class="w-20 h-20 md:w-24 md:h-24 object-cover cursor-pointer border-2 border-transparent" 
+                             onclick="changeImage('assets/image/product9.png', this)">
+                    </div>
+                </div>
+                
+                <!-- Product Info -->
+                <div class="w-full md:w-1/2 mt-8 md:mt-0" data-aos="fade-up" data-aos-duration="500" data-aos-delay="300">
+                    <h1 class="text-2xl md:text-3xl font-bold mb-2">Elegant Patchwork Skirt</h1>
+                    <p class="text-gray-500 mb-4">Summer Collection</p>
+                    
+                    <div class="flex items-center space-x-4 mb-6">
+                        <span class="text-xl md:text-2xl font-bold">Rp. 175.000</span>
+                        <span class="text-gray-500 line-through">Rp. 350.000</span>
+                        <span class="bg-rewear-sale text-white px-2 py-1 text-xs font-bold">50% OFF</span>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <p class="text-gray-800 leading-relaxed">
+                            This Elegant Patchwork Skirt is a standout piece from our Summer Collection. Crafted from upcycled fabrics, each skirt features a unique patchwork design that tells its own story. The comfortable elastic waistband and flowing silhouette make it perfect for warm weather occasions.
+                        </p>
+                    </div>
+                    
+                    <div class="mb-8">
+                        <h3 class="font-semibold mb-2">Size</h3>
+                        <div class="flex space-x-2 mb-6">
+                            <button class="w-10 h-10 border border-gray-300 flex items-center justify-center hover:bg-black hover:text-white transition-colors">S</button>
+                            <button class="w-10 h-10 border border-gray-300 bg-black text-white flex items-center justify-center">M</button>
+                            <button class="w-10 h-10 border border-gray-300 flex items-center justify-center hover:bg-black hover:text-white transition-colors">L</button>
+                            <button class="w-10 h-10 border border-gray-300 flex items-center justify-center hover:bg-black hover:text-white transition-colors">XL</button>
+                        </div>
+                        
+                        <h3 class="font-semibold mb-2">Quantity</h3>
+                        <div class="flex items-center mb-6">
+                            <button class="w-10 h-10 bg-gray-100 flex items-center justify-center text-lg" onclick="decrementQuantity()">-</button>
+                            <input id="quantityInput" type="text" value="1" class="w-16 h-10 border border-gray-300 text-center mx-2">
+                            <button class="w-10 h-10 bg-gray-100 flex items-center justify-center text-lg" onclick="incrementQuantity()">+</button>
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 mb-8">
+                        <a href="bag.html" class="bg-black text-white py-3 px-6 font-semibold md:flex-grow-2 hover:bg-gray-800 transition-colors text-center">
+                            Add to Cart
+                        </a>
+                        <a href="wishlist.html" class="border border-black py-3 px-6 font-semibold flex items-center justify-center space-x-2 md:flex-grow hover:bg-gray-100 transition-colors">
+                            <svg width="16" height="14" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M10 17.8L8.55 16.4C6.86667 14.85 5.475 13.4833 4.375 12.3C3.275 11.1167 2.4 10.0333 1.75 9.05C1.1 8.06667 0.645833 7.16667 0.3875 6.35C0.129167 5.53333 0 4.71667 0 3.9C0 2.76667 0.375 1.8 1.125 1C1.875 0.2 2.83333 -0.2 4 -0.2C4.81667 -0.2 5.5625 -0.0125 6.2375 0.3625C6.9125 0.7375 7.5 1.3 8 2.05C8.5 1.3 9.0875 0.7375 9.7625 0.3625C10.4375 -0.0125 11.1833 -0.2 12 -0.2C13.1667 -0.2 14.125 0.2 14.875 1C15.625 1.8 16 2.76667 16 3.9C16 4.71667 15.8708 5.53333 15.6125 6.35C15.3542 7.16667 14.9 8.06667 14.25 9.05C13.6 10.0333 12.725 11.1167 11.625 12.3C10.525 13.4833 9.13333 14.85 7.45 16.4L6 17.8H10Z" fill="black"/>
+                            </svg>
+                            <span>Add to Wishlist</span>
+                        </a>
+                    </div>
+                    
+                    <div class="border-t border-gray-200 pt-6 space-y-2 text-sm">
+                        <div>
+                            <span class="font-semibold">SKU:</span>
+                            <span class="ml-2">RW-PS-002</span>
+                        </div>
+                        <div>
+                            <span class="font-semibold">Categories:</span>
+                            <span class="ml-2">Skirts, Summer Collection, Sustainable Fashion</span>
+                        </div>
+                        <div>
+                            <span class="font-semibold">Tags:</span>
+                            <span class="ml-2">Patchwork, Upcycled, Handmade</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product Tabs -->
+            <div class="mt-16" data-aos="fade-up" data-aos-duration="500" data-aos-delay="400">
+                <div class="border-b border-gray-200">
+                    <div class="flex space-x-8">
+                        <button class="tab-header active py-2 px-1 border-b-2 border-black font-semibold" onclick="switchTab('description')">Description</button>
+                        <button class="tab-header py-2 px-1 border-b-2 border-transparent" onclick="switchTab('additional')">Additional Information</button>
+                        <button class="tab-header py-2 px-1 border-b-2 border-transparent" onclick="switchTab('reviews')">Reviews (2)</button>
+                    </div>
+                </div>
+                
+                <div id="description" class="tab-content active py-6">
+                    <p class="mb-4">The Elegant Patchwork Skirt is a statement piece from our Summer Collection, showcasing our commitment to sustainable fashion through creative upcycling. Each skirt is uniquely crafted from reclaimed fabrics, giving new life to materials that would otherwise go to waste.</p>
+                    <p class="mb-2">Key features:</p>
+                    <ul class="list-disc pl-5 space-y-1">
+                        <li>Made from upcycled fabric scraps</li>
+                        <li>Unique patchwork design - no two pieces are exactly alike</li>
+                        <li>Comfortable elastic waistband</li>
+                        <li>Flowy A-line silhouette</li>
+                        <li>Mid-calf length</li>
+                        <li>Handcrafted by local artisans</li>
+                    </ul>
+                </div>
+                
+                <div id="additional" class="tab-content py-6">
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <tbody>
+                                <tr class="border-b border-gray-200">
+                                    <td class="py-3 pr-4 font-semibold w-1/3">Material</td>
+                                    <td class="py-3">Upcycled cotton and linen blend</td>
+                                </tr>
+                                <tr class="border-b border-gray-200">
+                                    <td class="py-3 pr-4 font-semibold">Weight</td>
+                                    <td class="py-3">Light to medium weight</td>
+                                </tr>
+                                <tr class="border-b border-gray-200">
+                                    <td class="py-3 pr-4 font-semibold">Length</td>
+                                    <td class="py-3">Mid-calf (approximately 75cm)</td>
+                                </tr>
+                                <tr class="border-b border-gray-200">
+                                    <td class="py-3 pr-4 font-semibold">Care Instructions</td>
+                                    <td class="py-3">Hand wash cold. Do not bleach. Line dry in shade. Cool iron if needed.</td>
+                                </tr>
+                                <tr class="border-b border-gray-200">
+                                    <td class="py-3 pr-4 font-semibold">Origin</td>
+                                    <td class="py-3">Handmade in Indonesia</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <div id="reviews" class="tab-content py-6">
+                    <div class="space-y-8">
+                        <div class="border-b border-gray-200 pb-6">
+                            <div class="flex justify-between mb-2">
+                                <h3 class="font-semibold">Amelia J.</h3>
+                                <span class="text-gray-500 text-sm">July 8, 2023</span>
+                            </div>
+                            <div class="flex text-yellow-400 mb-2">★★★★★</div>
+                            <p>I absolutely love this skirt! The patchwork design is so unique and I've received so many compliments. The fact that it's made from upcycled materials makes me feel good about my purchase. The elastic waistband is comfortable and the length is perfect.</p>
+                        </div>
+                        
+                        <div class="pb-6">
+                            <div class="flex justify-between mb-2">
+                                <h3 class="font-semibold">Dina L.</h3>
+                                <span class="text-gray-500 text-sm">June 22, 2023</span>
+                            </div>
+                            <div class="flex text-yellow-400 mb-2">★★★★☆</div>
+                            <p>Beautiful skirt with a great story behind it. I love that each piece is unique. The only reason I'm giving 4 stars instead of 5 is that mine was slightly shorter than expected. Still a lovely addition to my summer wardrobe!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Related Products -->
+            <div class="mt-16" data-aos="fade-up" data-aos-duration="500" data-aos-delay="500">
+                <h2 class="text-2xl font-bold text-center mb-8">Complete Your Look</h2>
+                
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+                    <!-- Product 1 -->
+                    <div class="group">
+                        <a href="detail_collection.html" class="block">
+                            <div class="overflow-hidden mb-3">
+                                <img src="assets/image/product7.png" alt="Colorful Patchwork Jacket" class="w-full h-40 md:h-48 object-cover transition-transform duration-500 group-hover:scale-110">
+                            </div>
+                            <h3 class="font-semibold text-sm md:text-base">Colorful Patchwork Jacket</h3>
+                            <p class="text-gray-500 text-xs md:text-sm">Summer Collection</p>
+                            <div class="flex items-center space-x-2 mt-1">
+                                <span class="font-bold text-sm md:text-base">Rp. 175.000</span>
+                                <span class="text-gray-500 line-through text-xs">Rp. 350.000</span>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Product 2 -->
+                    <div class="group">
+                        <a href="detail_collection.html" class="block">
+                            <div class="overflow-hidden mb-3">
+                                <img src="assets/image/product8.png" alt="Soft Green Plush Bag" class="w-full h-40 md:h-48 object-cover transition-transform duration-500 group-hover:scale-110">
+                            </div>
+                            <h3 class="font-semibold text-sm md:text-base">Soft Green Plush Bag</h3>
+                            <p class="text-gray-500 text-xs md:text-sm">Summer Collection</p>
+                            <div class="flex items-center space-x-2 mt-1">
+                                <span class="font-bold text-sm md:text-base">Rp. 175.000</span>
+                                <span class="text-gray-500 line-through text-xs">Rp. 350.000</span>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Product 3 -->
+                    <div class="group">
+                        <a href="detail_collection.html" class="block">
+                            <div class="overflow-hidden mb-3">
+                                <img src="assets/image/product9.png" alt="Distressed Denim" class="w-full h-40 md:h-48 object-cover transition-transform duration-500 group-hover:scale-110">
+                            </div>
+                            <h3 class="font-semibold text-sm md:text-base">Distressed Denim</h3>
+                            <p class="text-gray-500 text-xs md:text-sm">Summer Collection</p>
+                            <div class="flex items-center space-x-2 mt-1">
+                                <span class="font-bold text-sm md:text-base">Rp. 175.000</span>
+                                <span class="text-gray-500 line-through text-xs">Rp. 350.000</span>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Product 4 -->
+                    <div class="group">
+                        <a href="detail_collection.html" class="block">
+                            <div class="overflow-hidden mb-3">
+                                <img src="assets/image/product10.png" alt="Jacket Denim" class="w-full h-40 md:h-48 object-cover transition-transform duration-500 group-hover:scale-110">
+                            </div>
+                            <h3 class="font-semibold text-sm md:text-base truncate">Jacket Denim</h3>
+                            <p class="text-gray-500 text-xs md:text-sm">Summer Collection</p>
+                            <div class="flex items-center space-x-2 mt-1">
+                                <span class="font-bold text-sm md:text-base">Rp. 175.000</span>
+                                <span class="text-gray-500 line-through text-xs">Rp. 350.000</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="bg-rewear-footer text-white py-8 mt-auto">
+            <div class="grid grid-cols-2 md:grid-cols-5 px-8 md:px-32 gap-y-8">
+                <!-- Column 1 -->
+                <div class="col-span-1" data-aos="fade-up" data-aos-duration="500" data-aos-delay="400">
+                    <h3 class="text-lg font-semibold mb-4">Rewear</h3>
+                    <ul class="space-y-2">
+                        <li><a href="location.html" class="hover:text-gray-300 transition-colors">Location</a></li>
+                        <li><a href="about.html" class="hover:text-gray-300 transition-colors">About Us</a></li>
+                        <li class="cursor-pointer hover:text-gray-300 transition-colors" onclick="togglePopup(true)">Contact Us</li>
+                    </ul>
+                </div>
+                
+                <!-- Column 2 -->
+                <div class="col-span-1" data-aos="fade-up" data-aos-duration="500" data-aos-delay="500">
+                    <h3 class="text-lg font-semibold mb-4">Help</h3>
+                    <ul class="space-y-2">
+                        <li class="cursor-pointer hover:text-gray-300 transition-colors" onclick="togglePopup(true)">FAQ</li>
+                        <li class="cursor-pointer hover:text-gray-300 transition-colors" onclick="togglePopup(true)">Payment</li>
+                        <li class="cursor-pointer hover:text-gray-300 transition-colors" onclick="togglePopup(true)">Privacy and Policy</li>
+                    </ul>
+                </div>
+                
+                <!-- Column 3 -->
+                <div class="col-span-1" data-aos="fade-up" data-aos-duration="500" data-aos-delay="600">
+                    <h3 class="text-lg font-semibold mb-4">Customer</h3>
+                    <ul class="space-y-2">
+                        <li class="cursor-pointer hover:text-gray-300 transition-colors" onclick="togglePopup(true)">Voucher</li>
+                        <li class="cursor-pointer hover:text-gray-300 transition-colors" onclick="togglePopup(true)">Order Track</li>
+                    </ul>
+                </div>
+                
+                <!-- Column 4 -->
+                <div class="col-span-1" data-aos="fade-up" data-aos-duration="500" data-aos-delay="700">
+                    <h3 class="text-lg font-semibold mb-4">Products</h3>
+                    <ul class="space-y-2">
+                        <li class="cursor-pointer hover:text-gray-300 transition-colors" onclick="togglePopup(true)">Sale</li>
+                        <li><a href="collection.html" class="hover:text-gray-300 transition-colors">New Collections</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Column 5 - Social -->
+                <div class="col-span-2 md:col-span-1 flex flex-col items-center md:items-start" data-aos="fade-up" data-aos-duration="500" data-aos-delay="800">
+                    <a href="index.html" class="text-xl font-bold mb-2">Rewear.co</a>
+                    <h3 class="text-sm font-semibold mb-2">Follow Us</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-8 h-8 rounded-full bg-white flex items-center justify-center">
+                            <i class="fab fa-instagram text-rewear-footer"></i>
+                        </a>
+                        <a href="#" class="w-8 h-8 rounded-full bg-white flex items-center justify-center">
+                            <i class="fab fa-facebook-f text-rewear-footer"></i>
+                        </a>
+                        <a href="#" class="w-8 h-8 rounded-full bg-white flex items-center justify-center">
+                            <i class="fab fa-twitter text-rewear-footer"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Popup -->
+    <div id="popup" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white p-6 rounded-lg shadow-lg w-80 text-center">
+            <img src="assets/icons/gear-512.png" alt="Loading" class="w-24 h-24 mx-auto animate-spin">
+            <h2 class="text-xl font-bold mt-4 mb-2 text-black">Coming Soon</h2>
+            <p class="mb-4 text-gray-700">This feature is not available yet.</p>
+            <button onclick="togglePopup(false)" class="bg-red-500 text-white px-4 py-2 rounded text-sm">Close</button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+
+        // Navigation functions
+        const hamburger = document.getElementById('hamburger');
+        const cross = document.getElementById('cross');
+        const sidebar = document.getElementById('sidebar');
+        const nav = document.getElementById('nav');
+        const popup = document.getElementById('popup');
+
+        hamburger.addEventListener('click', function() {
+            nav.style.pointerEvents = 'all';
+            sidebar.classList.add('translate-x-0');
+            sidebar.classList.remove('-translate-x-full');
+        });
+
+        cross.addEventListener('click', function() {
+            sidebar.classList.remove('translate-x-0');
+            sidebar.classList.add('-translate-x-full');
+            setTimeout(() => {
+                nav.style.pointerEvents = 'none';
+            }, 300);
+        });
+
+        function togglePopup(show) {
+            popup.style.display = show ? 'flex' : 'none';
+        }
+
+        function searching() {
+            const searchBar = document.getElementById('searchBar');
+            searchBar.style.display = searchBar.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        // Product detail functions
+        function changeImage(src, thumbnail) {
+            document.getElementById('mainImage').src = src;
+            
+            // Remove active class from all thumbnails
+            const thumbnails = document.querySelectorAll('.thumbnail');
+            const allThumbs = document.querySelectorAll('img[onclick^="changeImage"]');
+            allThumbs.forEach(thumb => {
+                thumb.classList.remove('border-black');
+                thumb.classList.add('border-transparent');
+            });
+            
+            // Add active class to clicked thumbnail
+            thumbnail.classList.remove('border-transparent');
+            thumbnail.classList.add('border-black');
+        }
+
+        function incrementQuantity() {
+            const input = document.getElementById('quantityInput');
+            input.value = parseInt(input.value) + 1;
+        }
+
+        function decrementQuantity() {
+            const input = document.getElementById('quantityInput');
+            if (parseInt(input.value) > 1) {
+                input.value = parseInt(input.value) - 1;
+            }
+        }
+
+        function addToCart() {
+            // Add to cart logic would go here
+            togglePopup(true);
+            setTimeout(() => {
+                window.location.href = 'bag.html';
+            }, 1500);
+        }
+
+        function switchTab(tabId) {
+            // Hide all tab contents
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Remove active class from all tab headers
+            const tabHeaders = document.querySelectorAll('.tab-header');
+            tabHeaders.forEach(header => {
+                header.classList.remove('active');
+                header.classList.remove('border-black');
+                header.classList.add('border-transparent');
+                header.classList.remove('font-semibold');
+            });
+            
+            // Show selected tab content and activate header
+            document.getElementById(tabId).classList.add('active');
+            const activeHeader = document.querySelector(`.tab-header[onclick="switchTab('${tabId}')"]`);
+            activeHeader.classList.add('active');
+            activeHeader.classList.remove('border-transparent');
+            activeHeader.classList.add('border-black');
+            activeHeader.classList.add('font-semibold');
+        }
+    </script>
+</body>
+</html>
